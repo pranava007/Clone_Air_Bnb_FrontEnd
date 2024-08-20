@@ -1,0 +1,110 @@
+.colorr{
+    color: red;
+}
+
+.colo{
+    background-color:#DB0C64;
+    color: white;
+    font-family:  monospace;
+    font-weight: 500;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-toggle::after {
+    display: none; /* Hide the arrow */
+  }
+
+.sidebartext{
+    font-family:  monospace;
+}
+
+.textfamily{
+    font-family:  monospace;
+}
+
+.sidebartext:hover{
+    background-color: #DB0C64;
+    color: white;
+}
+.bgco{
+    background-color: #DB0C64;
+    color: white;
+
+}
+.back{
+    background-color: rgb(153, 154, 156);
+   
+}
+
+.bor {
+    border-radius: 100px !important;
+    height: auto; /* Remove fixed height for better responsiveness */
+    /* padding: 8px;  */
+    padding-right: 25px;
+    padding-left: 25px;
+    /* width: 2500px; */
+    max-width: 600px; /* Set a maximum width */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Distribute space between items */
+    background-color: #fff; /* Background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+    border: 1px solid #ddd; /* Border for fields */
+    margin: 0 auto; /* Center horizontally */
+}
+.heigh{
+    height: 36px !important;
+}
+
+ /* .scrolling-navbar {
+    white-space: nowrap;
+    scrollbar-width: thin;
+  }
+  
+  .scrolling-navbar .nav-item {
+    display: inline-block;
+    padding: 10px;
+   
+  } */
+
+  .borderr{
+    border-radius: 100px !important;
+  }
+  .scrolling-navbar {
+    white-space: nowrap;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  }
+  
+  .scrolling-navbar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+  
+  .scrolling-navbar .nav-item {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+  }
+  
+  .borderr {
+    border-bottom: 1px solid #ccc; /* Example border styling */
+  }
+  .nav-link i {
+    color: black !important;
+  }
+
+  .nav-link {
+    color: black  !important;
+  }
+  
+
+  .villa-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+  }
