@@ -3,10 +3,11 @@ import { Formik, Form, Field } from 'formik';
 
 const BookingCard = () => {
     const [showGuests, setShowGuests] = useState(false);
+    // const {} = use
 
   const initialValues = {
-    checkIn: '2024-09-08',
-    checkOut: '2024-09-13',
+    checkIn: '',
+    checkOut: '',
     guests: {
         Adults: 1,
         child: 0,

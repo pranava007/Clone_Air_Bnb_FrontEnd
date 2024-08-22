@@ -20,7 +20,7 @@ const ResetPassword = () => {
     password: Yup.string().required('Password is required').min(6, 'Password must be at least 6 characters long'),
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values) => { 
     try {
       const response = await axios.post(`http://localhost:5000/api/auth/reset-password/${id}/${token}`, values);
       alert('Reset Successfully');
