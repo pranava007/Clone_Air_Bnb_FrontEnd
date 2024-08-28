@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { FaBars } from "react-icons/fa";
-// import UserSlice from '../Redux/Slice/UserSlice';
 import { Link } from "react-router-dom";
 import { signOutSuccess } from "../Redux/Slice/UserSlice";
 
