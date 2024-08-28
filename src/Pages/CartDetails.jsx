@@ -37,7 +37,10 @@ const CartDetails = ({ items }) => {
   const { currentuser } = useSelector((state) => state.user);
 
   // Safely access nested properties
-  const hostDetails = currentuser?.rest?._id === element.hostId ? currentuser : null;
+  const hostDetails = currentuser?.rest?._id === element.hostId ? currentuser : null; 
+  
+
+  console.log(hostDetails)
 
   return (
     <div className="container mt-4">
@@ -190,7 +193,7 @@ const CartDetails = ({ items }) => {
 
           <div className="col-md-4">
             {/* <div className="card shadow p-3 mb-5 bg-white rounded"> */}
-           <BookingCard/>
+           <BookingCard index={index}/>
            
             {/* </div> */}
           </div>

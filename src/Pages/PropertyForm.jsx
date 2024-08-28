@@ -12,6 +12,7 @@ import {
 } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 
+
 const PropertyForm = () => {
   const { currentuser } = useSelector((state) => state.user);
   const hostId = currentuser.rest._id;
@@ -30,6 +31,7 @@ const PropertyForm = () => {
 
   const validationSchema = Yup.object({
     title: Yup.string().required('Required'),
+    sub_title: Yup.string().required('Required'),
     description: Yup.string().required('Required'),
     location: Yup.string().required('Required'),
     pricePerNight: Yup.number().required('Required').positive('Must be a positive number'),
@@ -49,67 +51,102 @@ const PropertyForm = () => {
     'Adapted', 'GrandPianos', 'CreativeSpace', 'Dammusi', 'Riads', 'Trulli', 'Beach'
   ];
 
-  // State for image uploading
   const [file, setFile] = useState(null);
-  const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
-  const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [imageFileUploadProgress, setimageFileUploadProgress] = useState(null);
+  const [imageFileUploadError, setimageFileUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
 
+ 
+
+  // image upload
   const handleUploadImage = async () => {
+    if (!file) {
+      setimageFileUploadError("Please select an image");
+      return null;
+    }
+  
     try {
       if (!file) {
-        setImageFileUploadError('Please select an image');
+        setimageFileUploadError("Please select an image");
         return;
       }
-      setImageFileUploadError(null);
+      setimageFileUploadError(null);
       const storage = getStorage(app);
-      const filename = new Date().getTime() + '-' + file.name;
-      const storageRef = ref(storage, filename);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const filename = new Date().getTime() + "-" + file.name;
+      const storageref = ref(storage, filename);
+      const uploadTask = uploadBytesResumable(storageref, file);
       uploadTask.on(
-        'state_changed',
+        "state_changed",
         (snapshot) => {
           const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setImageFileUploadProgress(progress.toFixed(0));
+            snapshot.bytesTransferred / snapshot.totalBytes + 100;
+          setimageFileUploadProgress(progress.toFixed(0));
         },
         (error) => {
-          setImageFileUploadError('Image upload failed');
-          setImageFileUploadProgress(null);
+          setimageFileUploadError("Image Upload Failed");
+          setimageFileUploadProgress(null);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setImageFileUploadProgress(null);
-            setImageFileUploadError(null);
+            setimageFileUploadProgress(null);
+            setimageFileUploadError(null);
             setFormData({ ...formData, image: downloadURL });
           });
         }
       );
     } catch (error) {
-      setImageFileUploadError('Image upload failed');
-      setImageFileUploadProgress(null);
+      setimageFileUploadError("Image upload failed");
+      setimageFileUploadProgress(null);
       console.log(error);
     }
   };
-
+  
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    const propertyData = { ...values, hostId };
-
-    await axios.post('http://localhost:5000/api/property/createProperty', propertyData)
-      .then((response) => {
-        console.log('Property created:', response.data);
-        alert('Successfully added');
-        resetForm();
-      })
-      .catch((error) => {
-        console.error('Error creating property:', error);
-      })
-      .finally(() => {
+    try {
+      // Await the image upload before submitting the form data
+      const imageUrl = await handleUploadImage();
+  
+      if (!imageUrl) {
+        setPublishError("Image upload failed, please try again.");
         setSubmitting(false);
-      });
+        return;
+      }
+  
+      const propertyData = { ...values, hostId, images: [...values.images, imageUrl] };
+  
+      const response = await axios.post(
+        "http://localhost:5000/api/property/createProperty",
+        propertyData
+      );
+      console.log("Property created:", response.data);
+      alert("Successfully added");
+      resetForm();
+      navigate("/");
+    } catch (error) {
+      handleAxiosError(error); // custom function to handle error responses
+    } finally {
+      setSubmitting(false);
+    }
   };
+  
+  // Custom function to handle Axios errors
+  const handleAxiosError = (error) => {
+    if (error.response) {
+      console.error("Error response:", error.response.data);
+      setPublishError(`Failed to create property: ${error.response.data.message || "Server error"}`);
+    } else if (error.request) {
+      console.error("Error request:", error.request);
+      setPublishError("No response from the server. Please try again.");
+    } else {
+      console.error("Error message:", error.message);
+      setPublishError(`Error: ${error.message}`);
+    }
+  };
+  
+  
 
   return (
     <div className="container mt-5">
@@ -141,7 +178,7 @@ const PropertyForm = () => {
                 className="form-control"
                 id="sub_title"
               />
-              <ErrorMessage name="title" component="div" className="text-danger" />
+              <ErrorMessage name="sub_title" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
@@ -177,7 +214,6 @@ const PropertyForm = () => {
               <ErrorMessage name="pricePerNight" component="div" className="text-danger" />
             </div>
 
-            {/* Category Dropdown */}
             <div className="mb-3">
               <label htmlFor="category" className="form-label">Category</label>
               <Field as="select" name="category" className="form-select" id="category">
@@ -255,36 +291,6 @@ const PropertyForm = () => {
                   </div>
                 )}
               </FieldArray>
-              {/* File input for image upload */}
-              <div className="mb-3">
-                <label htmlFor="fileUpload" className="form-label">Upload Image</label>
-                <input
-                  type="file"
-                  id="fileUpload"
-                  className="form-control"
-                  onChange={(e) => setFile(e.target.files[0])}
-                />
-                <button type="button" className="btn btn-secondary mt-2" onClick={handleUploadImage}>
-                  Upload
-                </button>
-                {imageFileUploadProgress && (
-                  <div className="progress mt-2">
-                    <div
-                      className="progress-bar"
-                      role="progressbar"
-                      style={{ width: `${imageFileUploadProgress}%` }}
-                      aria-valuenow={imageFileUploadProgress}
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    >
-                      {imageFileUploadProgress}%
-                    </div>
-                  </div>
-                )}
-                {imageFileUploadError && (
-                  <div className="text-danger">{imageFileUploadError}</div>
-                )}
-              </div>
               <ErrorMessage name="images" component="div" className="text-danger" />
             </div>
 
@@ -293,7 +299,7 @@ const PropertyForm = () => {
               <FieldArray name="availability">
                 {({ push, remove, form }) => (
                   <div>
-                    {form.values.availability.map((date, index) => (
+                    {form.values.availability.map((_, index) => (
                       <div key={index} className="d-flex mb-2">
                         <Field
                           name={`availability[${index}].startDate`}
@@ -326,9 +332,18 @@ const PropertyForm = () => {
               </FieldArray>
             </div>
 
-            <button type="submit" className="btn btn-success" disabled={isSubmitting}>
-              Create Post
+         
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
+            {publishError && (
+              <div className="text-danger mt-2">{publishError}</div>
+            )}
           </Form>
         )}
       </Formik>

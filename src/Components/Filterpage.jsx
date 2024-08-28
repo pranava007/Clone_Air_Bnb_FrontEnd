@@ -12,13 +12,11 @@ import { useDispatch } from "react-redux";
 import { fetchPropertiesSuccess } from "../Redux/Slice/PropertySlice";
 import { filterSuccess } from "../Redux/Slice/FilterSlice";
 
-
 const Filterpage = () => {
   const [showGuests, setShowGuests] = useState(false);
   const [properties, setProperties] = useState([]);
-  const [fileout,setFilterout]=useState('')
-  const navigate = useNavigate()
-  
+  const [fileout, setFilterout] = useState("");
+  const navigate = useNavigate();
 
   const dispath = useDispatch();
 
@@ -129,41 +127,27 @@ const Filterpage = () => {
 
   const handleSubmit = (values) => {
     setFilterout(values); // store the filter values in the state
-  
+
     const filteredProperties = properties.filter((property) => {
-      console.log('filproresult',property); 
-    
-      
+      console.log("filproresult", property);
+
       // Example comparisons (adjust as necessary):
       const matchPlace = property.location.includes(values.place);
-   
+
       const checkInDate = new Date(values.checkIn);
       const checkOutDate = new Date(values.checkOut);
       const availability = property.availability[0];
       const isAvailable =
         checkInDate >= new Date(availability.startDate) &&
         checkOutDate <= new Date(availability.endDate);
-      
-     
-       
 
       return matchPlace && isAvailable;
-   
-      
-    })
+    });
 
-    console.log('Sclice Filter PROPERTY :',filteredProperties);
-    dispath(filterSuccess(filteredProperties))
-    navigate('/datalist')
-    
-    
-
-  }
-
-  
-    
-
-
+    console.log("Sclice Filter PROPERTY :", filteredProperties);
+    dispath(filterSuccess(filteredProperties));
+    navigate("/datalist");
+  };
 
   return (
     <div className="container textfamily ">
@@ -355,9 +339,6 @@ const Filterpage = () => {
       {/* properdy Start */}
     </div>
   );
+};
 
-
-  
-}
-
-export default Filterpage
+export default Filterpage;

@@ -5,12 +5,15 @@ import persistStore from "redux-persist/es/persistStore";
 import persistReducer from "redux-persist/es/persistReducer";
 import propertyReducer from "./Slice/PropertySlice";
 import filterRaducer from './Slice/FilterSlice'
+import imageUploadRaducer from "./Slice/imageUploadSlice";
+
 
 
 export const rootReducer = combineReducers({
     user:UserReducer,
     properties:propertyReducer,
     filters:filterRaducer,
+    imageUpload:imageUploadRaducer,
 })
 
 const persistConfig = {
