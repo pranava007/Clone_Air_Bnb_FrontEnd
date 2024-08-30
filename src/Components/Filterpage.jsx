@@ -62,7 +62,7 @@ const Filterpage = () => {
   const categories = [
     { name: "Trending", icon: "fas fa-fire" },
     { name: "Countryside", icon: "fas fa-tree" },
-    { name: "Islands", icon: "fas fa-umbrella-beach" },
+ 
     { name: "Containers", icon: "fas fa-box" },
     { name: "Camping", icon: "fas fa-campground" },
     { name: "Amazing Pools", icon: "fas fa-swimmer" },

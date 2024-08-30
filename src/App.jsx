@@ -19,7 +19,7 @@ import Trending from "./Components/Trending";
 import Filterpage from './Components/Filterpage'
 import All from "./Components/All";
 import Countryside from "./Components/Countryside";
-import Islands from "./components/Islands";
+
 
 import Containers from "./components/Containers";
 import Camping from "./components/Camping";
@@ -119,7 +119,7 @@ function App() {
           <Route path="/datalist" element={<Datalistout />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/countryside" element={<Countryside />} />
-          <Route path="/islands" element={<Islands />} />
+       
           <Route path="/containers" element={<Containers />} />
           <Route path="/camping" element={<Camping />} />
           <Route path="/amazingpools" element={<AmazingPools />} />
