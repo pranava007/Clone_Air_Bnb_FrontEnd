@@ -16,12 +16,12 @@ import HomePage from "./Pages/HomePage";
 // fileter pages
 
 import Trending from "./Components/Trending";
-import Filterpage from './Components/Filterpage'
+import Filterpage from "./Components/Filterpage";
 import All from "./Components/All";
 import Countryside from "./Components/Countryside";
 
 
-import Containers from "./components/Containers";
+import Containers from "../components/Containers";
 import Camping from "./components/Camping";
 import AmazingPools from "./components/AmazingPools";
 import Beachfront from "./components/Beachfront";
@@ -79,10 +79,7 @@ import Cart from "./Components/Cart";
 import { useSelector } from "react-redux";
 import { Datalistout } from "./Components/Datalistout";
 
-
-
 function App() {
-
   const { properties } = useSelector((state) => state.properties);
   return (
     <>
@@ -109,17 +106,17 @@ function App() {
 
           <Route path="/get-post" element={<PreviousPost />} />
 
-          <Route path="/cart/:index" element={<CartDetails items={properties} />} />
-
+          <Route
+            path="/cart/:index"
+            element={<CartDetails items={properties} />}
+          />
 
           {/* Fileter pages */}
-         
 
-        
           <Route path="/datalist" element={<Datalistout />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/countryside" element={<Countryside />} />
-       
+
           <Route path="/containers" element={<Containers />} />
           <Route path="/camping" element={<Camping />} />
           <Route path="/amazingpools" element={<AmazingPools />} />
