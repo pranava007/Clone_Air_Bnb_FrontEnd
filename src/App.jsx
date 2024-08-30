@@ -19,7 +19,7 @@ import Trending from "./Components/Trending";
 import Filterpage from './Components/Filterpage'
 import All from "./Components/All";
 import Countryside from "./Components/Countryside";
-import Islands from "./components/Islands";
+import Islands from "./components/Islands.jsx";
 import Containers from "./components/Containers";
 import Camping from "./components/Camping";
 import AmazingPools from "./components/AmazingPools";
