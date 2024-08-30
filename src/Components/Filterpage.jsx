@@ -143,6 +143,7 @@ const Filterpage = () => {
 
       return matchPlace && isAvailable;
     });
+    
 
     console.log("Sclice Filter PROPERTY :", filteredProperties);
     dispath(filterSuccess(filteredProperties));
