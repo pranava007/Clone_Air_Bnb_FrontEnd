@@ -3,7 +3,7 @@ import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { app } from '../firbase';
+import { app } from '../firbase'; // Ensure the correct path to your Firebase config
 import {
   getDownloadURL,
   getStorage,
@@ -11,7 +11,6 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
-
 
 const PropertyForm = () => {
   const { currentuser } = useSelector((state) => state.user);
@@ -51,102 +50,82 @@ const PropertyForm = () => {
     'Adapted', 'GrandPianos', 'CreativeSpace', 'Dammusi', 'Riads', 'Trulli', 'Beach'
   ];
 
-  const [file, setFile] = useState(null);
-  const [imageFileUploadProgress, setimageFileUploadProgress] = useState(null);
-  const [imageFileUploadError, setimageFileUploadError] = useState(null);
-  const [formData, setFormData] = useState({});
-
+  const [imageFiles, setImageFiles] = useState([]);
+  const [imageUploadProgress, setImageUploadProgress] = useState({});
   const [publishError, setPublishError] = useState(null);
   const navigate = useNavigate();
 
- 
+  // Handle image upload
+  const handleUploadImages = async () => {
+    if (imageFiles.length === 0) return [];
 
-  // image upload
-  const handleUploadImage = async () => {
-    if (!file) {
-      setimageFileUploadError("Please select an image");
-      return null;
-    }
-  
-    try {
-      if (!file) {
-        setimageFileUploadError("Please select an image");
-        return;
-      }
-      setimageFileUploadError(null);
-      const storage = getStorage(app);
+    const storage = getStorage(app);
+    const uploadedImageUrls = [];
+
+    for (const file of imageFiles) {
       const filename = new Date().getTime() + "-" + file.name;
-      const storageref = ref(storage, filename);
-      const uploadTask = uploadBytesResumable(storageref, file);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            snapshot.bytesTransferred / snapshot.totalBytes + 100;
-          setimageFileUploadProgress(progress.toFixed(0));
-        },
-        (error) => {
-          setimageFileUploadError("Image Upload Failed");
-          setimageFileUploadProgress(null);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setimageFileUploadProgress(null);
-            setimageFileUploadError(null);
-            setFormData({ ...formData, image: downloadURL });
-          });
-        }
-      );
-    } catch (error) {
-      setimageFileUploadError("Image upload failed");
-      setimageFileUploadProgress(null);
-      console.log(error);
+      const storageRef = ref(storage, filename);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      await new Promise((resolve, reject) => {
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setImageUploadProgress((prev) => ({ ...prev, [filename]: progress.toFixed(0) }));
+          },
+          (error) => {
+            setPublishError('Image upload failed');
+            reject(error);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              uploadedImageUrls.push(downloadURL);
+              resolve();
+            });
+          }
+        );
+      });
     }
+    return uploadedImageUrls;
   };
-  
+
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     try {
-      // Await the image upload before submitting the form data
-      const imageUrl = await handleUploadImage();
-  
-      if (!imageUrl) {
-        setPublishError("Image upload failed, please try again.");
-        setSubmitting(false);
-        return;
-      }
-  
-      const propertyData = { ...values, hostId, images: [...values.images, imageUrl] };
-  
+      // Upload images and await their URLs
+      const uploadedImageUrls = await handleUploadImages();
+
+      const propertyData = { ...values, hostId, images: uploadedImageUrls };
+
       const response = await axios.post(
-        "https://clone-air-bnb-backend.onrender.com/api/property/createProperty",
+        'https://clone-air-bnb-backend.onrender.com/api/property/createProperty',
         propertyData
       );
-      console.log("Property created:", response.data);
-      alert("Successfully added");
+
+      console.log('Property created:', response.data);
+      alert('Successfully added');
       resetForm();
-      navigate("/");
+      navigate('/');
     } catch (error) {
-      handleAxiosError(error); // custom function to handle error responses
+      handleAxiosError(error); // Custom function to handle error responses
     } finally {
       setSubmitting(false);
     }
   };
-  
+
   // Custom function to handle Axios errors
   const handleAxiosError = (error) => {
     if (error.response) {
-      console.error("Error response:", error.response.data);
-      setPublishError(`Failed to create property: ${error.response.data.message || "Server error"}`);
+      console.error('Error response:', error.response.data);
+      setPublishError(`Failed to create property: ${error.response.data.message || 'Server error'}`);
     } else if (error.request) {
-      console.error("Error request:", error.request);
-      setPublishError("No response from the server. Please try again.");
+      console.error('Error request:', error.request);
+      setPublishError('No response from the server. Please try again.');
     } else {
-      console.error("Error message:", error.message);
+      console.error('Error message:', error.message);
       setPublishError(`Error: ${error.message}`);
     }
   };
-  
-  
 
   return (
     <div className="container mt-5">
@@ -156,9 +135,9 @@ const PropertyForm = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, setFieldValue }) => (
           <Form>
-
+            {/* Form Fields */}
             <div className="mb-3">
               <label htmlFor="title" className="form-label">Title</label>
               <Field
@@ -261,40 +240,15 @@ const PropertyForm = () => {
             </div>
 
             <div className="mb-3">
-  <label htmlFor="images" className="form-label">Image URLs</label>
-  <FieldArray name="images">
-    {({ push, remove, form }) => (
-      <div>
-        {form.values.images.map((image, index) => (
-          <div key={index} className="d-flex mb-2 align-items-center">
-            <Field
-              name={`images[${index}]`}
-              className="form-control"
-              placeholder="Image URL"
-            />
-            <button
-              type="button"
-              className="btn btn-danger ms-2"
-              onClick={() => remove(index)}
-            >
-              -
-            </button>
-          </div>
-        ))}
-        {/* Add button to push a new empty field to the array */}
-        <button
-          type="button"
-          className="btn btn-primary mt-2"
-          onClick={() => push('')}
-        >
-          Add Image URL
-        </button>
-      </div>
-    )}
-  </FieldArray>
-  <ErrorMessage name="images" component="div" className="text-danger" />
-</div>
-
+              <label htmlFor="images" className="form-label">Image Uploads</label>
+              <input
+                type="file"
+                multiple
+                onChange={(e) => setImageFiles(Array.from(e.target.files))}
+                className="form-control"
+              />
+              <ErrorMessage name="images" component="div" className="text-danger" />
+            </div>
 
             <div className="mb-3">
               <label htmlFor="availability" className="form-label">Availability</label>
@@ -333,8 +287,6 @@ const PropertyForm = () => {
                 )}
               </FieldArray>
             </div>
-
-         
 
             <button
               type="submit"
