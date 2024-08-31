@@ -48,7 +48,7 @@ const BookingCard = ({ index }) => {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/api/bookings/book', bookingData);
+            const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/bookings/book', bookingData);
             if (response.status === 201) {
                 setIsBookingSuccess(true);
             }
@@ -62,7 +62,7 @@ const BookingCard = ({ index }) => {
         setPaymentToken(token);
         if (isBookingSuccess) {
             try {
-                const response = await axios.post('http://localhost:5000/api/payment/process', {
+                const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
                     bookingId: properties[index]._id, // or the booking ID returned from the booking response
                     amount: calculateTotal(initialValues),

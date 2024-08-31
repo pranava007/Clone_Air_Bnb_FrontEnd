@@ -118,7 +118,7 @@ const PropertyForm = () => {
       const propertyData = { ...values, hostId, images: [...values.images, imageUrl] };
   
       const response = await axios.post(
-        "http://localhost:5000/api/property/createProperty",
+        "https://clone-air-bnb-backend.onrender.com/api/property/createProperty",
         propertyData
       );
       console.log("Property created:", response.data);

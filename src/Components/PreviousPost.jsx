@@ -15,7 +15,7 @@ const PreviousPost = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/property/getproperty`
+        `https://clone-air-bnb-backend.onrender.com/api/property/getproperty`
       );
       //   setProperties(response.data.result); // Assuming the API returns an array of properties
       const filterproperty = response.data.result.filter(

@@ -33,7 +33,7 @@ const Signup = () => {
 
     const handlesubmit = async(values)=>{
        try {
-        await axios.post(`http://localhost:5000/api/auth/registerUser`,values)
+        await axios.post(`https://clone-air-bnb-backend.onrender.com/api/auth/registerUser`,values)
         alert('Registration successful!' );
         navigate('/signin')
         

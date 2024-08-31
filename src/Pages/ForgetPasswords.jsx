@@ -21,7 +21,7 @@ const ForgetPasswords = () => {
 
   const handleSubmit = async (values) => {
   try {
-     await axios.post("http://localhost:5000/api/auth/forget-password", values);
+     await axios.post("https://clone-air-bnb-backend.onrender.com/api/auth/forget-password", values);
      alert('Email Send ForgetPassword Link')
 
     

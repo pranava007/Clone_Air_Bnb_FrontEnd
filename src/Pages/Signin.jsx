@@ -24,7 +24,7 @@ const Signin = () => {
     const handleSubmit = async (values) => {
         dispatch(signInStart());
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/logingUser', values);
+            const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/auth/logingUser', values);
             dispatch(signInSuccess(response.data));
             toast.success('Sign in successful!');
             navigate('/dashboard'); // Redirect to a different page after successful sign-in

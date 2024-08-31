@@ -22,7 +22,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (values) => { 
     try {
-      const response = await axios.post(`http://localhost:5000/api/auth/reset-password/${id}/${token}`, values);
+      const response = await axios.post(`https://clone-air-bnb-backend.onrender.com/api/auth/reset-password/${id}/${token}`, values);
       alert('Reset Successfully');
       navigate('/login'); // Navigate to login or another page after success
     } catch (error) {

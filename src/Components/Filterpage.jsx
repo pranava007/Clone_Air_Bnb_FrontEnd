@@ -115,7 +115,7 @@ const Filterpage = () => {
   const getproperty = async () => {
     try {
       const responce = await axios.get(
-        `http://localhost:5000/api/property/getproperty`
+        `https://clone-air-bnb-backend.onrender.com/api/property/getproperty`
       );
       setProperties(responce.data.result);
       dispath(fetchPropertiesSuccess(responce.data.result));
