@@ -261,38 +261,40 @@ const PropertyForm = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="images" className="form-label">Image URLs</label>
-              <FieldArray name="images">
-                {({ push, remove, form }) => (
-                  <div>
-                    {form.values.images.map((image, index) => (
-                      <div key={index} className="d-flex mb-2">
-                        <Field
-                          name={`images[${index}]`}
-                          className="form-control"
-                          placeholder="Image URL"
-                        />
-                        <button
-                          type="button"
-                          className="btn btn-danger ms-2"
-                          onClick={() => remove(index)}
-                        >
-                          -
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-primary ms-2"
-                          onClick={() => push('')}
-                        >
-                          +
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </FieldArray>
-              <ErrorMessage name="images" component="div" className="text-danger" />
-            </div>
+  <label htmlFor="images" className="form-label">Image URLs</label>
+  <FieldArray name="images">
+    {({ push, remove, form }) => (
+      <div>
+        {form.values.images.map((image, index) => (
+          <div key={index} className="d-flex mb-2 align-items-center">
+            <Field
+              name={`images[${index}]`}
+              className="form-control"
+              placeholder="Image URL"
+            />
+            <button
+              type="button"
+              className="btn btn-danger ms-2"
+              onClick={() => remove(index)}
+            >
+              -
+            </button>
+          </div>
+        ))}
+        {/* Add button to push a new empty field to the array */}
+        <button
+          type="button"
+          className="btn btn-primary mt-2"
+          onClick={() => push('')}
+        >
+          Add Image URL
+        </button>
+      </div>
+    )}
+  </FieldArray>
+  <ErrorMessage name="images" component="div" className="text-danger" />
+</div>
+
 
             <div className="mb-3">
               <label htmlFor="availability" className="form-label">Availability</label>
