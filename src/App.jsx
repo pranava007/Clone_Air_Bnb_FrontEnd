@@ -13,71 +13,77 @@ import PrivetRouter from "./Components/PrivetRouter";
 import PreviousPost from "./Components/PreviousPost";
 import HomePage from "./Pages/HomePage";
 
-// fileter pages
-
-import Trending from "./Components/Trending";
-import Filterpage from "./Components/Filterpage";
-import All from "./Components/All";
-import Countryside from "./Components/Countryside";
 
 
-import Containers from "../components/Containers";
-import Camping from "./components/Camping";
-import AmazingPools from "./components/AmazingPools";
-import Beachfront from "./components/Beachfront";
-import AmazingViews from "./components/AmazingViews";
-import Farmhouses from "./components/Farmhouses";
-import Cabins from "./components/Cabins";
-import Luxe from "./components/Luxe";
-import Rooms from "./components/Rooms";
-import EarthHomes from "./components/EarthHomes";
-import NationalParks from "./components/NationalParks";
-import HistoricalHomes from "./components/HistoricalHomes";
-import OffTheGrid from "./components/OffTheGrid";
-import Mansion from "./components/Mansion";
-import New from "./components/New";
-import TopOfTheWorld from "./components/TopOfTheWorld";
-import TopCities from "./components/TopCities";
-import Tropical from "./components/Tropical";
-import Play from "./components/Play";
-import Houseboats from "./components/Houseboats";
-import Boats from "./components/Boats";
-import Lake from "./components/Lake";
-import Cave from "./components/Cave";
-import CamperVans from "./components/CamperVans";
-import TinyHomes from "./components/TinyHomes";
-import Design from "./components/Design";
-import Surfing from "./components/Surfing";
-import AFrames from "./components/AFrames";
-import Golfing from "./components/Golfing";
-import BedAndBreakfast from "./components/BedAndBreakfast";
-import Vineyards from "./components/Vineyards";
-import Hanoks from "./components/Hanoks";
-import Skiing from "./components/Skiing";
-import CycladicHomes from "./components/CycladicHomes";
-import ChefsKitchens from "./components/ChefsKitchens";
-import Windmill from "./components/Windmill";
-import CasesParticulares from "./components/CasesParticulares";
-import Minsus from "./components/Minsus";
-import Roykans from "./components/Roykans";
-import ShepherdsHuts from "./components/ShepherdsHuts";
-import Towers from "./components/Towers";
-import Desert from "./components/Desert";
-import Yurts from "./components/Yurts";
-import Barns from "./components/Barns";
-import SkiInOut from "./components/SkiInOut";
-import Adapted from "./components/Adapted";
-import GrandPianos from "./components/GrandPianos";
-import CreativeSpace from "./components/CreativeSpace";
-import Dammusi from "./components/Dammusi";
-import Riads from "./components/Riads";
-import Trulli from "./components/Trulli";
-import Beach from "./components/Beach";
+
+
 
 import CartDetails from "./Pages/CartDetails";
 import Cart from "./Components/Cart";
 import { useSelector } from "react-redux";
 import { Datalistout } from "./Components/Datalistout";
+
+
+
+// fileter pages
+
+
+import Adapted from "./Components/Adapted";
+import AFrames from "./Components/AFrames";
+import All from "./Components/All";
+import AmazingPools from "./Components/AmazingPools";
+import AmazingViews from "./Components/AmazingViews";
+import Barns from "./Components/Barns";
+import Beach from "./Components/Beach";
+import Beachfront from "./Components/Beachfront";
+import BedAndBreakfast from "./Components/BedAndBreakfast";
+import Boats from "./Components/Boats";
+import Cabins from "./Components/Cabins";
+import CamperVans from "./Components/CamperVans";
+import Camping from "./Components/Camping";
+import CasesParticulares from "./Components/CasesParticulares";
+import Cave from "./Components/Cave";
+import ChefsKitchens from "./Components/ChefsKitchens";
+import Containers from "./Components/Containers";
+import Countryside from "./Components/Countryside";
+import CreativeSpace from "./Components/CreativeSpace";
+import CycladicHomes from "./Components/CycladicHomes";
+import Dammusi from "./Components/Dammusi";
+import Desert from "./Components/Desert";
+import Design from "./Components/Design";
+import EarthHomes from "./Components/EarthHomes";
+import Farmhouses from "./Components/Farmhouses";
+import Golfing from "./Components/Golfing";
+import GrandPianos from "./Components/GrandPianos";
+import Grate from "./Components/Grate";
+import Hanoks from "./Components/Hanoks";
+import HistoricalHomes from "./Components/HistoricalHomes";
+import Houseboats from "./Components/Houseboats";
+import Lake from "./Components/Lake";
+import NationalParks from "./Components/NationalParks";
+import New from "./Components/New";
+import OffTheGrid from "./Components/OffTheGrid";
+import Play from "./Components/Play";
+import Riads from "./Components/Riads";
+import Rooms from "./Components/Rooms";
+import ShepherdsHuts from "./Components/ShepherdsHuts";
+import SkiInOut from "./Components/SkiInOut";
+import Surfing from "./Components/Surfing";
+import TinyHomes from "./Components/TinyHomes";
+import TopCities from "./Components/TopCities";
+import TopOfTheWorld from "./Components/TopOfTheWorld";
+import Towers from "./Components/Towers";
+import Trending from "./Components/Trending";
+import Tropical from "./Components/Tropical";
+import Trulli from "./Components/Trulli";
+import Vineyards from "./Components/Vineyards";
+import Windmill from "./Components/Windmill";
+import Yurts from "./Components/Yurts";
+import Luxe from "./Components/Luxe";
+import Mansion from "./Components/Mansion";
+import Minsus from "./Components/Minsus";
+import Roykans from "./Components/Roykans";
+import Skiing from "./Components/Skiing";
 
 function App() {
   const { properties } = useSelector((state) => state.properties);
@@ -113,62 +119,70 @@ function App() {
 
           {/* Fileter pages */}
 
-          <Route path="/datalist" element={<Datalistout />} />
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/countryside" element={<Countryside />} />
+          <Route path="/adapted" element={<Adapted/>}/>
+          <Route path="/aFrames" element={<AFrames/>}/>
+          <Route path="/all" element={<All/>}/>
+          <Route path="/amazingPools" element={<AmazingPools/>}/>
+          <Route path="/amazingViews" element={<AmazingViews/>}/>
+          <Route path="/barns" element={<Barns/>}/>
+          <Route path="/beach" element={<Beach/>}/>
+          <Route path="/beachfront" element={<Beachfront/>}/>
+          <Route path="/bedAndBreakfast" element={<BedAndBreakfast/>}/>
+          <Route path="/boats" element={<Boats/>}/>
+          <Route path="/cabins" element={<Cabins/>}/>
+          <Route path="/camperVans" element={<CamperVans/>}/>
+          <Route path="/camping" element={<Camping/>}/>
+          <Route path="/casesParticulares" element={<CasesParticulares/>}/>
+          <Route path="/cave" element={<Cave/>}/>
+          <Route path="/chefsKitchens" element={<ChefsKitchens/>}/>
+          <Route path="/containers" element={<Containers/>}/>
+          <Route path="/countryside" element={<Countryside/>}/>
+          <Route path="/creativeSpace" element={<CreativeSpace/>}/>
+          <Route path="/cycladicHomes" element={<CycladicHomes/>}/>
+          <Route path="/dammusi" element={<Dammusi/>}/>
+          <Route path="/desert" element={<Desert/>}/>
+          <Route path="/design" element={<Design/>}/>
+          <Route path="/earthHomes" element={<EarthHomes/>}/>
+          <Route path="/farmhouses" element={<Farmhouses/>}/>
+          <Route path="/golfing" element={<Golfing/>}/>
+          <Route path="/grandPianos" element={<GrandPianos/>}/>
+          <Route path="/grate" element={<Grate/>}/>
+          <Route path="/hanoks" element={<Hanoks/>}/>
+          <Route path="/historicalHomes" element={<HistoricalHomes/>}/>
+          <Route path="/houseboats" element={<Houseboats/>}/>
+          <Route path="/lake" element={<Lake/>}/>
+          <Route path="/luxe" element={<Luxe/>}/>
+          <Route path="/mansion" element={<Mansion />}/>
+          <Route path="/minsus" element={<Minsus/>}/>
+          <Route path="/nationalParks" element={<NationalParks/>}/>
+          <Route path="/new" element={<New/>}/>
+          <Route path="/offTheGrid" element={<OffTheGrid/>}/>
+          <Route path="/play" element={<Play/>}/>
+          <Route path="/riads" element={<Riads/>}/>
+          <Route path="/rooms" element={<Rooms/>}/>
+          <Route path="/roykans" element={<Roykans/>}/>
+          <Route path="/shepherdsHuts" element={<ShepherdsHuts/>}/>
+          <Route path="/skiing" element={<Skiing/>}/>
+          <Route path="/skiInOut" element={<SkiInOut/>}/>
+          <Route path="/surfing" element={<Surfing/>}/>
+          <Route path="/tinyHomes" element={<TinyHomes/>}/>          
+          <Route path="/topCities" element={<TopCities/>}/>         
+          <Route path="/topOfTheWorld" element={<TopOfTheWorld/>}/>         
+          <Route path="/towers" element={<Towers/>}/>         
+          <Route path="/trending" element={<Trending/>}/>         
+          <Route path="/tropical" element={<Tropical/>}/>         
+          <Route path="/trulli" element={<Trulli/>}/>         
+          <Route path="/vineyards" element={<Vineyards/>}/>         
+          <Route path="/windmill" element={<Windmill/>}/>         
+          <Route path="/yurts" element={<Yurts/>}/>         
 
-          <Route path="/containers" element={<Containers />} />
-          <Route path="/camping" element={<Camping />} />
-          <Route path="/amazingpools" element={<AmazingPools />} />
-          <Route path="/beachfront" element={<Beachfront />} />
-          <Route path="/amazingviews" element={<AmazingViews />} />
-          <Route path="/farmhouses" element={<Farmhouses />} />
-          <Route path="/cabins" element={<Cabins />} />
-          <Route path="/luxe" element={<Luxe />} />
-          <Route path="/rooms" element={<Rooms />} />
-          <Route path="/earthhomes" element={<EarthHomes />} />
-          <Route path="/nationalparks" element={<NationalParks />} />
-          <Route path="/historicalhomes" element={<HistoricalHomes />} />
-          <Route path="/offthegrid" element={<OffTheGrid />} />
-          <Route path="/mansion" element={<Mansion />} />
-          <Route path="/new" element={<New />} />
-          <Route path="/topoftheworld" element={<TopOfTheWorld />} />
-          <Route path="/topcities" element={<TopCities />} />
-          <Route path="/tropical" element={<Tropical />} />
-          <Route path="/play" element={<Play />} />
-          <Route path="/houseboats" element={<Houseboats />} />
-          <Route path="/boats" element={<Boats />} />
-          <Route path="/lake" element={<Lake />} />
-          <Route path="/cave" element={<Cave />} />
-          <Route path="/campervans" element={<CamperVans />} />
-          <Route path="/tinyhomes" element={<TinyHomes />} />
-          <Route path="/design" element={<Design />} />
-          <Route path="/surfing" element={<Surfing />} />
-          <Route path="/aframes" element={<AFrames />} />
-          <Route path="/golfing" element={<Golfing />} />
-          <Route path="/bedandbreakfast" element={<BedAndBreakfast />} />
-          <Route path="/vineyards" element={<Vineyards />} />
-          <Route path="/hanoks" element={<Hanoks />} />
-          <Route path="/skiing" element={<Skiing />} />
-          <Route path="/cycladichomes" element={<CycladicHomes />} />
-          <Route path="/chefskitchens" element={<ChefsKitchens />} />
-          <Route path="/windmill" element={<Windmill />} />
-          <Route path="/casesparticulares" element={<CasesParticulares />} />
-          <Route path="/minsus" element={<Minsus />} />
-          <Route path="/roykans" element={<Roykans />} />
-          <Route path="/shepherdshuts" element={<ShepherdsHuts />} />
-          <Route path="/towers" element={<Towers />} />
-          <Route path="/desert" element={<Desert />} />
-          <Route path="/yurts" element={<Yurts />} />
-          <Route path="/barns" element={<Barns />} />
-          <Route path="/skiinout" element={<SkiInOut />} />
-          <Route path="/adapted" element={<Adapted />} />
-          <Route path="/grandpianos" element={<GrandPianos />} />
-          <Route path="/creativespace" element={<CreativeSpace />} />
-          <Route path="/dammusi" element={<Dammusi />} />
-          <Route path="/riads" element={<Riads />} />
-          <Route path="/trulli" element={<Trulli />} />
-          <Route path="/beach" element={<Beach />} />
+
+          
+
+
+
+
+     
         </Routes>
         <Footer />
       </BrowserRouter>
