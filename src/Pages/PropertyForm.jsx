@@ -240,6 +240,19 @@ const PropertyForm = () => {
             </div>
 
             <div className="mb-3">
+              <label htmlFor="images" className="form-label">Image Uploads</label>
+              <input
+                type="file"
+                multiple
+                onChange={(e) => setImageFiles(Array.from(e.target.files))}
+                className="form-control"
+              />
+              <ErrorMessage name="images" component="div" className="text-danger" />
+            </div>
+
+
+
+            <div className="mb-3">
       <label htmlFor="images" className="form-label">Image Uploads</label>
       <input
         type="file"
