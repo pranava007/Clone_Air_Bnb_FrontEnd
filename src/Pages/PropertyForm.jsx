@@ -1,107 +1,53 @@
-import React, { useState } from "react";
-import { Formik, Form, Field, FieldArray, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { app } from "../firbase"; // Ensure the correct path to your Firebase config
+import React, { useState } from 'react';
+import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { app } from '../firbase'; // Ensure the correct path to your Firebase config
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
-} from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+} from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 const PropertyForm = () => {
-
   const { currentuser } = useSelector((state) => state.user);
-
   const hostId = currentuser.rest._id;
 
-  console.log(hostId);
-  
-
   const initialValues = {
-    title: "",
-    sub_title: "",
-    description: "",
-    location: "",
-    pricePerNight: "",
-    category: "",
-    amenities: [""],
-    images: [""],
-    availability: [{ startDate: "", endDate: "" }],
+    title: '',
+    sub_title: '',
+    description: '',
+    location: '',
+    pricePerNight: '',
+    category: '',
+    amenities: [''],
+    images: [''],
+    availability: [{ startDate: '', endDate: '' }],
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("Required"),
-    sub_title: Yup.string().required("Required"),
-    description: Yup.string().required("Required"),
-    location: Yup.string().required("Required"),
-    pricePerNight: Yup.number()
-      .required("Required")
-      .positive("Must be a positive number"),
-    category: Yup.string().required("Required"),
+    title: Yup.string().required('Required'),
+    sub_title: Yup.string().required('Required'),
+    description: Yup.string().required('Required'),
+    location: Yup.string().required('Required'),
+    pricePerNight: Yup.number().required('Required').positive('Must be a positive number'),
+    category: Yup.string().required('Required'),
     amenities: Yup.array().of(Yup.string()),
-    images: Yup.array().of(Yup.string().url("Must be a valid URL")),
+    images: Yup.array().of(Yup.string().url('Must be a valid URL')),
   });
 
   const categories = [
-    "Trending",
-    "Countryside",
-    "Islands",
-    "Containers",
-    "Camping",
-    "AmazingPools",
-    "Beachfront",
-    "AmazingViews",
-    "Farmas",
-    "Cabins",
-    "Luxe",
-    "Rooms",
-    "EarthHomes",
-    "NationalParks",
-    "HistoricalHomes",
-    "Offthegrid",
-    "Mansion",
-    "New",
-    "TopoftheWorld",
-    "TopCities",
-    "Tropical",
-    "Play",
-    "Houseboats",
-    "Boats",
-    "Lake",
-    "Cave",
-    "CamperVans",
-    "TinyHomes",
-    "Design",
-    "Surfing",
-    "A-frames",
-    "Golfing",
-    "Bed&Breakfast",
-    "Vineyards",
-    "Hanoks",
-    "Skiing",
-    "CycladicHomes",
-    "ChefsKitchens",
-    "Windmill",
-    "CasesParticulares",
-    "Minsus",
-    "Roykans",
-    "ShepherdsHuts",
-    "Towers",
-    "Desert",
-    "Yurts",
-    "Barns",
-    "Skiinout",
-    "Adapted",
-    "GrandPianos",
-    "CreativeSpace",
-    "Dammusi",
-    "Riads",
-    "Trulli",
-    "Beach",
+    'Trending', 'Countryside', 'Islands', 'Containers', 'Camping', 'AmazingPools',
+    'Beachfront', 'AmazingViews', 'Farmas', 'Cabins', 'Luxe', 'Rooms', 'EarthHomes',
+    'NationalParks', 'HistoricalHomes', 'Offthegrid', 'Mansion', 'New', 'TopoftheWorld',
+    'TopCities', 'Tropical', 'Play', 'Houseboats', 'Boats', 'Lake', 'Cave', 'CamperVans',
+    'TinyHomes', 'Design', 'Surfing', 'A-frames', 'Golfing', 'Bed&Breakfast', 'Vineyards',
+    'Hanoks', 'Skiing', 'CycladicHomes', 'ChefsKitchens', 'Windmill', 'CasesParticulares',
+    'Minsus', 'Roykans', 'ShepherdsHuts', 'Towers', 'Desert', 'Yurts', 'Barns', 'Skiinout',
+    'Adapted', 'GrandPianos', 'CreativeSpace', 'Dammusi', 'Riads', 'Trulli', 'Beach'
   ];
 
   const [imageFiles, setImageFiles] = useState([]);
@@ -123,17 +69,13 @@ const PropertyForm = () => {
 
       await new Promise((resolve, reject) => {
         uploadTask.on(
-          "state_changed",
+          'state_changed',
           (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setImageUploadProgress((prev) => ({
-              ...prev,
-              [filename]: progress.toFixed(0),
-            }));
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setImageUploadProgress((prev) => ({ ...prev, [filename]: progress.toFixed(0) }));
           },
           (error) => {
-            setPublishError("Image upload failed");
+            setPublishError('Image upload failed');
             reject(error);
           },
           () => {
@@ -156,14 +98,14 @@ const PropertyForm = () => {
       const propertyData = { ...values, hostId, images: uploadedImageUrls };
 
       const response = await axios.post(
-        "https://clone-air-bnb-backend.onrender.com/api/property/createProperty",
+        'https://clone-air-bnb-backend.onrender.com/api/property/createProperty',
         propertyData
       );
 
-      console.log("Property created:", response.data);
-      alert("Successfully added");
+      console.log('Property created:', response.data);
+      alert('Successfully added');
       resetForm();
-      navigate("/");
+      navigate('/');
     } catch (error) {
       handleAxiosError(error); // Custom function to handle error responses
     } finally {
@@ -174,17 +116,13 @@ const PropertyForm = () => {
   // Custom function to handle Axios errors
   const handleAxiosError = (error) => {
     if (error.response) {
-      console.error("Error response:", error.response.data);
-      setPublishError(
-        `Failed to create property: ${
-          error.response.data.message || "Server error"
-        }`
-      );
+      console.error('Error response:', error.response.data);
+      setPublishError(`Failed to create property: ${error.response.data.message || 'Server error'}`);
     } else if (error.request) {
-      console.error("Error request:", error.request);
-      setPublishError("No response from the server. Please try again.");
+      console.error('Error request:', error.request);
+      setPublishError('No response from the server. Please try again.');
     } else {
-      console.error("Error message:", error.message);
+      console.error('Error message:', error.message);
       setPublishError(`Error: ${error.message}`);
     }
   };
@@ -201,100 +139,63 @@ const PropertyForm = () => {
           <Form>
             {/* Form Fields */}
             <div className="mb-3">
-              <label htmlFor="title" className="form-label">
-                Title
-              </label>
+              <label htmlFor="title" className="form-label">Title</label>
               <Field
                 type="text"
                 name="title"
                 className="form-control"
                 id="title"
               />
-              <ErrorMessage
-                name="title"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="title" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="sub_title" className="form-label">
-                Sub_Title
-              </label>
+              <label htmlFor="sub_title" className="form-label">Sub_Title</label>
               <Field
                 type="text"
                 name="sub_title"
                 className="form-control"
                 id="sub_title"
               />
-              <ErrorMessage
-                name="sub_title"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="sub_title" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="description" className="form-label">
-                Description
-              </label>
+              <label htmlFor="description" className="form-label">Description</label>
               <Field
                 as="textarea"
                 name="description"
                 className="form-control"
                 id="description"
               />
-              <ErrorMessage
-                name="description"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="description" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="location" className="form-label">
-                Location
-              </label>
+              <label htmlFor="location" className="form-label">Location</label>
               <Field
                 type="text"
                 name="location"
                 className="form-control"
                 id="location"
               />
-              <ErrorMessage
-                name="location"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="location" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="pricePerNight" className="form-label">
-                Price per Night
-              </label>
+              <label htmlFor="pricePerNight" className="form-label">Price per Night</label>
               <Field
                 type="number"
                 name="pricePerNight"
                 className="form-control"
                 id="pricePerNight"
               />
-              <ErrorMessage
-                name="pricePerNight"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="pricePerNight" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="category" className="form-label">
-                Category
-              </label>
-              <Field
-                as="select"
-                name="category"
-                className="form-select"
-                id="category"
-              >
+              <label htmlFor="category" className="form-label">Category</label>
+              <Field as="select" name="category" className="form-select" id="category">
                 <option value="">Select a category</option>
                 {categories.map((category, index) => (
                   <option key={index} value={category}>
@@ -302,17 +203,11 @@ const PropertyForm = () => {
                   </option>
                 ))}
               </Field>
-              <ErrorMessage
-                name="category"
-                component="div"
-                className="text-danger"
-              />
+              <ErrorMessage name="category" component="div" className="text-danger" />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="amenities" className="form-label">
-                Amenities
-              </label>
+              <label htmlFor="amenities" className="form-label">Amenities</label>
               <FieldArray name="amenities">
                 {({ push, remove, form }) => (
                   <div>
@@ -333,7 +228,7 @@ const PropertyForm = () => {
                         <button
                           type="button"
                           className="btn btn-primary ms-2"
-                          onClick={() => push("")}
+                          onClick={() => push('')}
                         >
                           +
                         </button>
@@ -345,26 +240,30 @@ const PropertyForm = () => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="images" className="form-label">
-                Image Uploads
-              </label>
-              <input
-                type="file"
-                multiple
-                onChange={(e) => setImageFiles(Array.from(e.target.files))}
-                className="form-control"
-              />
-              <ErrorMessage
-                name="images"
-                component="div"
-                className="text-danger"
-              />
-            </div>
+      <label htmlFor="images" className="form-label">Image Uploads</label>
+      <input
+        type="file"
+        multiple
+        onChange={handleFileChange}
+        className="form-control"
+      />
+      <ErrorMessage name="images" component="div" className="text-danger" />
+      
+      <div className="mt-2">
+        {imagePreviews.map((preview, index) => (
+          <img
+            key={index}
+            src={preview}
+            alt={`preview-${index}`}
+            className="img-thumbnail"
+            style={{ width: '100px', height: '100px', marginRight: '5px' }}
+          />
+        ))}
+      </div>
+    </div>
 
             <div className="mb-3">
-              <label htmlFor="availability" className="form-label">
-                Availability
-              </label>
+              <label htmlFor="availability" className="form-label">Availability</label>
               <FieldArray name="availability">
                 {({ push, remove, form }) => (
                   <div>
@@ -390,7 +289,7 @@ const PropertyForm = () => {
                         <button
                           type="button"
                           className="btn btn-primary ms-2"
-                          onClick={() => push({ startDate: "", endDate: "" })}
+                          onClick={() => push({ startDate: '', endDate: '' })}
                         >
                           +
                         </button>
@@ -406,7 +305,7 @@ const PropertyForm = () => {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Submitting..." : "Submit"}
+              {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
             {publishError && (
               <div className="text-danger mt-2">{publishError}</div>
