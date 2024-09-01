@@ -252,29 +252,7 @@ const PropertyForm = () => {
 
 
 
-            <div className="mb-3">
-      <label htmlFor="images" className="form-label">Image Uploads</label>
-      <input
-        type="file"
-        multiple
-        onChange={handleFileChange}
-        className="form-control"
-      />
-      <ErrorMessage name="images" component="div" className="text-danger" />
-      
-      <div className="mt-2">
-        {imagePreviews.map((preview, index) => (
-          <img
-            key={index}
-            src={preview}
-            alt={`preview-${index}`}
-            className="img-thumbnail"
-            style={{ width: '100px', height: '100px', marginRight: '5px' }}
-          />
-        ))}
-      </div>
-    </div>
-
+       
             <div className="mb-3">
               <label htmlFor="availability" className="form-label">Availability</label>
               <FieldArray name="availability">
