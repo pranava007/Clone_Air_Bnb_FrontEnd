@@ -194,7 +194,7 @@ const BookingCard = ({ index }) => {
                                         <StripeCheckout
                                             stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
                                             token={handleToken}
-                                            amount={totalPrice / 100} // Stripe expects the amount in cents
+                                            amount={totalPrice } // Stripe expects the amount in cents
                                             currency="INR"
                                             description="Booking Payment"
                                         />
