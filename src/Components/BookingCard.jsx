@@ -62,16 +62,20 @@ const BookingCard = ({ index }) => {
     const handleToken = async (token) => {
         setPaymentToken(token);
         if (bookingId) {
+            const totalPrice = calculateTotal(initialValues);
+            const totalPriceInCents = Math.round(totalPrice * 100); // Convert total price to cents
+
             try {
                 const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
-                    bookingId, // Use the booking ID
+                    bookingId,
                     userId: currentuser.rest._id,
                     Product: {
                         _id: properties[index]._id,
                         name: properties[index].title,
-                        price: calculateTotal(initialValues),
+                        price: totalPrice, // Price in INR
                     },
+                    amount: totalPriceInCents // Pass amount in cents
                 });
 
                 if (response.status === 200) {
@@ -194,7 +198,7 @@ const BookingCard = ({ index }) => {
                                     <StripeCheckout
                                         stripeKey={import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY}
                                         token={handleToken}
-                                        amount={totalPrice * 100} // Stripe expects the amount in cents
+                                        amount={calculateTotal(initialValues) * 100} // Stripe expects the amount in cents
                                         currency="INR"
                                         description="Booking Payment"
                                     />
