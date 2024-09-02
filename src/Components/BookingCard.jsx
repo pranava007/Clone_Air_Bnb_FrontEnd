@@ -44,6 +44,7 @@ const BookingCard = ({ index }) => {
             checkOutDate: values.checkOut,
             totalPrice,
         };
+        console.log(bookingData)
 
         try {
             const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/bookings/book', bookingData);
