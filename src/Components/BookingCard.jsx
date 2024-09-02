@@ -50,6 +50,8 @@ const BookingCard = ({ index }) => {
             const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/bookings/book', bookingData);
             if (response.status === 201) {
                 setBookingId(response.data._id); // Set booking ID from response
+                console.log(response.data._id);
+                
                 setIsBookingSuccess(true);
                 alert('Room booked successfully!');
             }
