@@ -8,6 +8,7 @@ const BookingCard = ({ index }) => {
     const [showGuests, setShowGuests] = useState(false);
     const [paymentToken, setPaymentToken] = useState(null);
     const [isBookingSuccess, setIsBookingSuccess] = useState(false);
+    const [bookingId, setBookingId] = useState(null); // Add state for booking ID
     const { properties } = useSelector((state) => state.properties);
     const { currentuser } = useSelector((state) => state.user);
 
@@ -44,11 +45,11 @@ const BookingCard = ({ index }) => {
             checkOutDate: values.checkOut,
             totalPrice,
         };
-        console.log(bookingData)
 
         try {
             const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/bookings/book', bookingData);
             if (response.status === 201) {
+                setBookingId(response.data._id); // Set booking ID from response
                 setIsBookingSuccess(true);
                 alert('Room booked successfully!');
             }
@@ -60,11 +61,11 @@ const BookingCard = ({ index }) => {
 
     const handleToken = async (token) => {
         setPaymentToken(token);
-        if (isBookingSuccess) {
+        if (bookingId) {
             try {
                 const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
-                    bookingId: bookingData._id,  // Use the booking ID returned from the booking response
+                    bookingId, // Use the booking ID
                     userId: currentuser.rest._id,
                     Product: {
                         _id: properties[index]._id,
@@ -72,7 +73,7 @@ const BookingCard = ({ index }) => {
                         price: calculateTotal(initialValues),
                     },
                 });
-    
+
                 if (response.status === 200) {
                     alert('Payment successful! Your booking is confirmed.');
                     setIsBookingSuccess(false); // Reset booking success state
