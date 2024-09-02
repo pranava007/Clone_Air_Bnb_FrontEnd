@@ -74,6 +74,7 @@ const BookingCard = ({ index }) => {
                         name: properties[index].title,
                         price: calculateTotal(initialValues),
                     },
+                    amount: calculateTotal(initialValues),
                 });
 
                 if (response.status === 200) {
