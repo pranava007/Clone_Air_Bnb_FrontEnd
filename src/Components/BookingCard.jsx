@@ -64,6 +64,13 @@ const BookingCard = ({ index }) => {
     const handleToken = async (token) => {
         setPaymentToken(token);
         if (bookingId) {
+
+            const totalPrice = calculateTotal(initialValues); // Ensure this returns a valid number
+            const totalPriceInCents = Math.round(totalPrice * 100); // Convert to cents
+
+
+
+
             try {
                 const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
@@ -72,9 +79,9 @@ const BookingCard = ({ index }) => {
                     Product: {
                         _id: properties[index]._id,
                         name: properties[index].title,
-                        price: calculateTotal(initialValues),
+                        price: totalPrice,
                     },
-                    amount: calculateTotal(initialValues),
+                    amount:totalPriceInCents,
                 });
 
                 if (response.status === 200) {
