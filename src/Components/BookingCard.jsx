@@ -61,21 +61,19 @@ const BookingCard = ({ index }) => {
 
     const handleToken = async (token) => {
         setPaymentToken(token);
-        if (isBookingSuccess) {
-            const totalPrice = calculateTotal(initialValues); // Calculate total in INR
-    
+        if (bookingId) {
             try {
                 const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
-                    bookingId: bookingData._id,  // Ensure booking ID is correctly set
+                    bookingId, // Use the booking ID
                     userId: currentuser.rest._id,
                     Product: {
                         _id: properties[index]._id,
                         name: properties[index].title,
-                        price: totalPrice, // Total price in INR
+                        price: calculateTotal(initialValues),
                     },
                 });
-    
+
                 if (response.status === 200) {
                     alert('Payment successful! Your booking is confirmed.');
                     setIsBookingSuccess(false); // Reset booking success state
@@ -86,7 +84,6 @@ const BookingCard = ({ index }) => {
             }
         }
     };
-    
 
     return (
         <Formik initialValues={initialValues} onSubmit={handleBooking}>
