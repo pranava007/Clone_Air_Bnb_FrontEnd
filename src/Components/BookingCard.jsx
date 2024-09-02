@@ -186,7 +186,7 @@ const BookingCard = ({ index }) => {
                                     <hr />
                                     <div className="d-flex justify-content-between">
                                         <p><strong>Total</strong></p>
-                                        <p><strong>₹{totalPrice}</strong></p>
+                                        <p><strong>₹{totalPrice / 100}</strong></p>
                                     </div>
 
                                     {/* Stripe Checkout */}
