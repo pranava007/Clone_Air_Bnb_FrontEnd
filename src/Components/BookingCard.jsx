@@ -58,23 +58,27 @@ const BookingCard = ({ index }) => {
     };
 
     const handleToken = async (token) => {
+        setPaymentToken(token);
         if (isBookingSuccess) {
             try {
                 const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/payment/process', {
                     token,
+                    bookingId: bookingData._id,  // Use the booking ID returned from the booking response
                     userId: currentuser.rest._id,
                     Product: {
-                        price: calculateTotal(initialValues),
-                        name: `Booking Payment for ${properties[index].title}`,
                         _id: properties[index]._id,
+                        name: properties[index].title,
+                        price: calculateTotal(initialValues),
                     },
                 });
+    
                 if (response.status === 200) {
-                    alert('Payment successful!');
+                    alert('Payment successful! Your booking is confirmed.');
+                    setIsBookingSuccess(false); // Reset booking success state
                 }
             } catch (error) {
-                console.error('Payment Error:', error);
-                alert('Payment failed.');
+                console.error('Payment Error:', error.response?.data?.message || error.message);
+                alert('Payment failed. Please try again or contact support.');
             }
         }
     };
