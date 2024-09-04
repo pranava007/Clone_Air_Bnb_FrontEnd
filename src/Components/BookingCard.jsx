@@ -66,7 +66,7 @@ const BookingCard = ({ index }) => {
         if (bookingId) {
 
             const totalPrice = calculateTotal(initialValues); // Ensure this returns a valid number
-            console.log(totalPrice);
+            console.log("total price",totalPrice);
             
             const totalPriceInCents = Math.round(totalPrice * 100); // Convert to cents
 
