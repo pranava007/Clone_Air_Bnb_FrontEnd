@@ -36,8 +36,12 @@ const BookingCard = ({ index }) => {
         return total;
     };
 
+    console.log("fuction calulate",calculateTotal());
+    
+
     const handleBooking = async (values) => {
         const totalPrice = calculateTotal(values);
+        console.log("total price1",totalPrice);
         const bookingData = {
             userId: currentuser.rest._id,
             propertyId: properties[index]._id,
@@ -66,7 +70,7 @@ const BookingCard = ({ index }) => {
         if (bookingId) {
 
             const totalPrice = calculateTotal(initialValues); // Ensure this returns a valid number
-            console.log("total price",totalPrice);
+            console.log("total price2",totalPrice);
             
             const totalPriceInCents = Math.round(totalPrice * 100); // Convert to cents
 
