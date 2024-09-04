@@ -110,7 +110,25 @@ const BookingCard = ({ index }) => {
                             <div className="card-body">
                                 <h5 className="card-title">₹{values.pricePerNight} <span className="text-muted">per night</span></h5>
 
-                                {/* Your existing UI components and fields */}
+                                {/* Date Picker Fields */}
+                                <div className="form-group">
+                                    <label htmlFor="checkIn">Check-in</label>
+                                    <Field type="date" id="checkIn" name="checkIn" className="form-control" />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="checkOut">Check-out</label>
+                                    <Field type="date" id="checkOut" name="checkOut" className="form-control" />
+                                </div>
+
+                                {/* Guests Input */}
+                                <div className="form-group">
+                                    <label htmlFor="guests.Adults">Adults</label>
+                                    <Field type="number" id="guests.Adults" name="guests.Adults" min="1" className="form-control" />
+                                    <label htmlFor="guests.child">Children</label>
+                                    <Field type="number" id="guests.child" name="guests.child" min="0" className="form-control" />
+                                    <label htmlFor="guests.pet">Pets</label>
+                                    <Field type="number" id="guests.pet" name="guests.pet" min="0" className="form-control" />
+                                </div>
 
                                 <button type="submit" className="btn btn-primary w-100 mb-3">Reserve</button>
                                 <p className="text-muted text-center">You won't be charged yet</p>
