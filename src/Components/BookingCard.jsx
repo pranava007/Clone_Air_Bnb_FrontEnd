@@ -12,7 +12,7 @@ const BookingCard = ({ index }) => {
     const { properties } = useSelector((state) => state.properties);
     const { currentuser } = useSelector((state) => state.user);
 
-    const price = properties[index].pricePerNight;
+    const price = properties[index]?.pricePerNight || 0; // Default to 0 if not available
 
     const initialValues = {
         checkIn: '',
@@ -32,7 +32,7 @@ const BookingCard = ({ index }) => {
         const checkInDate = new Date(checkIn);
         const checkOutDate = new Date(checkOut);
         const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
-        if (isNaN(nights)) return 0; // Check for NaN cases
+        if (isNaN(nights) || nights <= 0) return 0; // Check for invalid date range
         const total = nights * pricePerNight + cleaningFee + serviceFee;
         return total;
     };
@@ -64,8 +64,13 @@ const BookingCard = ({ index }) => {
     const handleToken = async (token, values) => {
         setPaymentToken(token);
         if (bookingId) {
-            const totalPrice = calculateTotal(values); // Correctly calculate total based on current form values
+            const totalPrice = calculateTotal(values); // Calculate total based on current form values
             console.log("Total Price (Payment):", totalPrice);
+
+            if (totalPrice <= 0) {
+                alert('Invalid total price. Please check the booking details.');
+                return;
+            }
 
             const totalPriceInCents = Math.round(totalPrice * 100); // Convert to cents
 
