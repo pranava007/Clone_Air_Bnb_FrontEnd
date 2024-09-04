@@ -11,7 +11,7 @@ const BookingCard = ({ index }) => {
     const [bookingId, setBookingId] = useState(null); // Add state for booking ID
     const { properties } = useSelector((state) => state.properties);
     const { currentuser } = useSelector((state) => state.user);
-    const [totalamount,setTotalamount] = useState('')
+
     const price = properties[index].pricePerNight;
 
     const initialValues = {
@@ -33,11 +33,10 @@ const BookingCard = ({ index }) => {
         const checkOutDate = new Date(checkOut);
         const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
         const total = nights * pricePerNight + cleaningFee + serviceFee;
-        setTotalamount(total)
         return total;
     };
 
-    console.log("fuction calulate",calculateTotal());
+
     
 
     const handleBooking = async (values) => {
@@ -70,7 +69,7 @@ const BookingCard = ({ index }) => {
         setPaymentToken(token);
         if (bookingId) {
 
-            const totalPrice = totalamount; // Ensure this returns a valid number
+            const totalPrice = calculateTotal(initialValues); // Ensure this returns a valid number
             console.log("total price2",totalPrice);
             
             const totalPriceInCents = Math.round(totalPrice * 100); // Convert to cents
