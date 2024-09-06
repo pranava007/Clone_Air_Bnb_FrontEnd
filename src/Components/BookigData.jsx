@@ -1,23 +1,20 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { bookingInfoSuccess } from '../Redux/Slice/BookingSlice'
 
 
 
 const BookigData = async() => {
-
-    const [Bookingdata,setBookingdata] = useState([])
+    const dispatch = useDispatch()
 
     try {
 
         const data = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings')
-        setBookingdata(data)
-        console.log(Bookingdata);
-        
-
-
-        
+        dispatch(bookingInfoSuccess(data))
+   
     } catch (error) {
+     console.log(error);
         
     }
 
