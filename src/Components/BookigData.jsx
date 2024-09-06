@@ -12,7 +12,7 @@ const BookigData = async() => {
 
         const responce = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings')
         dispatch(bookingInfoSuccess(responce.data))
-        console.log(data);
+        console.log(responce.data);
         
    
     } catch (error) {
