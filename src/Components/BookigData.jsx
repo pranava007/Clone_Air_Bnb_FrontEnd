@@ -12,6 +12,8 @@ const BookigData = async() => {
 
         const data = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings')
         dispatch(bookingInfoSuccess(data))
+        console.log(data);
+        
    
     } catch (error) {
      console.log(error);
