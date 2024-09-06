@@ -10,7 +10,7 @@ const BookigData = async() => {
 
     try {
 
-        const data = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/getbooking')
+        const data = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings')
         setBookingdata(data)
         console.log(Bookingdata);
         
