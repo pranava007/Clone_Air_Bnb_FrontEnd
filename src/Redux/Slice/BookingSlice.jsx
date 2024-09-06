@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bool } from "yup";
+
 
 const initialState = {
     bookingInfo:[],

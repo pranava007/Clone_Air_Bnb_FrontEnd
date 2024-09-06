@@ -4,7 +4,7 @@ import Cart from "./Cart";
 
 const All = () => {
   const { properties } = useSelector((state) => state.properties);
-  const { bookingInfo  } = useSelector((state)=>state.bookingInfo)
+  const { bookingInfo  } = useSelector((state)=>state.bookingInfo);
   console.log( 'Trending', properties);
   console.log( 'bookinginfo', bookingInfo);
   // const {} =  useSelector((state)=>)
