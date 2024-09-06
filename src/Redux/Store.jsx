@@ -6,6 +6,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import propertyReducer from "./Slice/PropertySlice";
 import filterRaducer from './Slice/FilterSlice'
 import imageUploadRaducer from "./Slice/imageUploadSlice";
+import BookingRaducer from "./Slice/BookingSlice";
 
 
 
@@ -14,6 +15,8 @@ export const rootReducer = combineReducers({
     properties:propertyReducer,
     filters:filterRaducer,
     imageUpload:imageUploadRaducer,
+    bookingInfo:BookingRaducer,
+
 })
 
 const persistConfig = {

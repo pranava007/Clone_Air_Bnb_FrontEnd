@@ -5,6 +5,7 @@ import Cart from "./Cart";
 const All = () => {
   const { properties } = useSelector((state) => state.properties);
   console.log( 'Trending', properties);
+  // const {} =  useSelector((state)=>)
 
   return (
     <>
