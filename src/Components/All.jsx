@@ -8,9 +8,7 @@ const All = () => {
   console.log( 'Trending', properties);
   console.log( 'bookinginfo', bookingInfo);
 
-  if(bookingInfo.status === "confirmed") {
-    console.log("confirm :",bookingInfo);
-  }
+ 
   
 
 
