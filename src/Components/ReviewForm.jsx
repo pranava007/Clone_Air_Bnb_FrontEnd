@@ -13,7 +13,7 @@ const ReviewForm = ({ element , userId }) => {
     try {
       const response = await axios.post('/api/reviews', {
         userId,
-        propertyId,
+        propertyId:element._id,
         rating: values.rating,
         comment: values.comment,
       });
