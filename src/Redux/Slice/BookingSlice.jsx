@@ -7,7 +7,7 @@ const initialState = {
     error:null,
 }
 
-const BookingDataInfo = createSlice({
+const BookingSlice = createSlice({
     name:'bookingInfo',
     initialState,
     reducers:{
@@ -19,5 +19,5 @@ const BookingDataInfo = createSlice({
     }
 })
 
-export const { bookingInfoSuccess  } = BookingDataInfo.actions;
-export default BookingDataInfo.reducer;
+export const { bookingInfoSuccess  } = BookingSlice.actions;
+export default BookingSlice.reducer;
