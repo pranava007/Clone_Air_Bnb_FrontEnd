@@ -31,7 +31,7 @@ const CartDetails = ({ items }) => {
 
   const { index } = useParams();
   const element = items[index];
-  console.log("check:",element);
+  // console.log("check:",element);
   
   const rating = 5.0;
   const reviews = 7;
@@ -42,7 +42,7 @@ const CartDetails = ({ items }) => {
 
   const userId = currentuser.rest._id;
 
-  console.log("userId",userId);
+  // console.log("userId",userId);
  
   // propertyId,
   
