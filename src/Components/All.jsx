@@ -6,13 +6,14 @@ const All = () => {
   const { properties } = useSelector((state) => state.properties);
   const { bookingInfo  } = useSelector((state)=>state.bookingInfo);
   console.log( 'Trending', properties);
-  console.log( 'Trending', properties[0]._id);
   console.log( 'bookinginfo', bookingInfo);
   console.log( 'bookinginfo', bookingInfo.bookings.status === "confirmed");
 
 
   const confirmedBookings = bookingInfo.bookings.filter((booking) => booking.status === "confirmed");
 
+
+  console.log( 'Trending', properties[0]._id);
   console.log("confirm book",confirmedBookings[0].propertyId._id);
 
   // const bookeddata = properties.
