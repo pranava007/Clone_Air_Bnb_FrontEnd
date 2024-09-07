@@ -36,7 +36,7 @@ const CartDetails = ({ items }) => {
   const isGuestFavourite = true;
 
   const { currentuser } = useSelector((state) => state.user);
-  console.log(currentuser);
+  console.log(currentuser.rest._id);
   
   
 
