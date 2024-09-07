@@ -11,6 +11,9 @@ const Cart = ({ element,index }) => {
     pricePerNight = "N/A",
   } = element;
 
+  console.log(element);
+  
+
   return (
     <div className="col-12 col-sm-6 col-lg-3 mb-4">
       <div className="card shadow-sm" style={{ minHeight: "500px", maxHeight: "500px" }}>

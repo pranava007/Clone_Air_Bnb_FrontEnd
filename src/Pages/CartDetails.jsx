@@ -41,6 +41,8 @@ const CartDetails = ({ items }) => {
   const userId = currentuser.rest._id;
 
   console.log("userId",userId);
+ 
+  // propertyId,
   
   
   
@@ -273,7 +275,7 @@ const CartDetails = ({ items }) => {
       </div>
 
 
-  <ReviewForm/>
+  <ReviewForm userId={userId}  />
   
   
   
