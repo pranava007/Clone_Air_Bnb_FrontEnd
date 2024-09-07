@@ -3,7 +3,12 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import axios from 'axios';
 
-const ReviewForm = ({ propertyId , userId }) => {
+const ReviewForm = ({ element , userId }) => {
+
+  console.log("property check :",element);
+  console.log("userId check :",userId);
+  
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const response = await axios.post('/api/reviews', {
