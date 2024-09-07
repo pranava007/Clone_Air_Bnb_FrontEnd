@@ -31,6 +31,8 @@ const CartDetails = ({ items }) => {
 
   const { index } = useParams();
   const element = items[index];
+  console.log("check:",element);
+  
   const rating = 5.0;
   const reviews = 7;
   const isGuestFavourite = true;
