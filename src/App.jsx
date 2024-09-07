@@ -84,6 +84,7 @@ import Mansion from "./Components/Mansion";
 import Minsus from "./Components/Minsus";
 import Roykans from "./Components/Roykans";
 import Skiing from "./Components/Skiing";
+import BookigData from "./Components/BookigData";
 
 function App() {
   const { properties } = useSelector((state) => state.properties);
@@ -116,6 +117,8 @@ function App() {
             path="/cart/:index"
             element={<CartDetails items={properties} />}
           />
+
+          <Route path="/bookingdata" element={<BookigData/>}/>
 
           {/* Fileter pages */}
 
