@@ -5,12 +5,24 @@ import Cart from "./Cart";
 
 const Farmhouses = () => {
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter(
-    (item) => item.category === "Farmhouses"
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
   );
-  // console.log('filter test',filterlist);
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'Farmhouses' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "Farmhouses" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>

@@ -4,11 +4,26 @@ import Filterpage from "./Filterpage";
 import Cart from "./Cart";
 
 const Minsus = () => {
+  // Access properties and booking information from Redux state
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter((item) => item.category === "Minsus");
-  // console.log('filter test',filterlist);
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
+  );
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'Minsus' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "Minsus" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>
@@ -17,7 +32,7 @@ const Minsus = () => {
         <div className="row justify-content-center">
           {/* Using map to render each property as a card */}
           {filterlist.map((element, index) => {
-            return <Cart element={element} index={index} />;
+            return <Cart element={element} index={index} key={index} />;
           })}
         </div>
       </div>

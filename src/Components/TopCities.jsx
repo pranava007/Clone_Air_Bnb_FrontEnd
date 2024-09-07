@@ -5,10 +5,24 @@ import Cart from "./Cart";
 
 const TopCities = () => {
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter((item) => item.category === "TopCities");
-  // console.log('filter test',filterlist);
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
+  );
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'TopCities' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "TopCities" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>
@@ -16,9 +30,9 @@ const TopCities = () => {
       <div className="container">
         <div className="row justify-content-center">
           {/* Using map to render each property as a card */}
-          {filterlist.map((element, index) => {
-            return <Cart element={element} index={index} />;
-          })}
+          {filterlist.map((element, index) => (
+            <Cart element={element} index={index} key={index} />
+          ))}
         </div>
       </div>
     </>

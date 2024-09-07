@@ -1,16 +1,28 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Filterpage from "./Filterpage";
-import Cart from './Cart'
+import Cart from "./Cart";
 
 const AmazingViews = () => {
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter(
-    (item) => item.category === "AmazingViews"
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
   );
-  // console.log('filter test',filterlist);
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'AmazingViews' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "AmazingViews" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>

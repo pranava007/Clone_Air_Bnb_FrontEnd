@@ -5,10 +5,24 @@ import Cart from "./Cart";
 
 const Camping = () => {
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter((item) => item.category === "Camping");
-  // console.log('filter test',filterlist);
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
+  );
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'Camping' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "Camping" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>

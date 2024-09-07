@@ -5,10 +5,24 @@ import Cart from "./Cart";
 
 const Desert = () => {
   const { properties } = useSelector((state) => state.properties);
-  // console.log( 'Trending', properties);
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  const filterlist = properties.filter((item) => item.category === "Desert");
-  // console.log('filter test',filterlist);
+  // Get confirmed bookings
+  const confirmedBookings = bookingInfo.bookings.filter(
+    (booking) => booking.status === "confirmed"
+  );
+
+  // Extract property IDs of confirmed bookings
+  const confirmedPropertyIds = confirmedBookings.map(
+    (booking) => booking.propertyId._id
+  );
+
+  // Filter properties with 'Desert' category and exclude confirmed bookings
+  const filterlist = properties.filter(
+    (property) =>
+      property.category === "Desert" &&
+      !confirmedPropertyIds.includes(property._id)
+  );
 
   return (
     <>
