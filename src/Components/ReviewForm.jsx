@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const ReviewForm = ({ element , userId }) => {
 
-  console.log("property check :",element);
+  console.log("property check :",element._id);
   console.log("userId check :",userId);
   
 
