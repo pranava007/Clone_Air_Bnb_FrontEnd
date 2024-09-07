@@ -37,6 +37,11 @@ const CartDetails = ({ items }) => {
 
   const { currentuser } = useSelector((state) => state.user);
   console.log(currentuser.rest._id);
+
+  const userId = currentuser.rest._id;
+
+  console.log("userId",userId);
+  
   
   
 
