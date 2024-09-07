@@ -15,7 +15,7 @@ const All = () => {
   // Extract booked property IDs from validBookingInfo
   const bookedPropertyIds = validBookingInfo
     .filter((info) => info.status === "confirmed") // Filter for booked statuses
-    .map((info) => info.propertyId); // Extract booked property IDs
+    .map((info) => info.propertyId?._id); // Extract the `_id` of the property
 
   // Filter properties that are not booked
   const availableProperties = properties.filter(
