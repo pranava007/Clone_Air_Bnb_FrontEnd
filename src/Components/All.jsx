@@ -14,15 +14,21 @@ const All = () => {
 
   // Extract booked property IDs from validBookingInfo
   const bookedPropertyIds = validBookingInfo
-    .filter((info) => info.status === "confirmed") // Filter for booked statuses
-    .map((info) => info.propertyId?._id); // Extract the `_id` of the property
+    .filter((info) => info.status === "confirmed" && info.propertyId?._id) // Ensure status is confirmed and propertyId exists
+    .map((info) => info.propertyId._id); // Extract the `_id` of the property
+
+  console.log("Booked Property IDs:", bookedPropertyIds); // Debug log booked property IDs
 
   // Filter properties that are not booked
-  const availableProperties = properties.filter(
-    (property) => !bookedPropertyIds.includes(property._id)
-  );
+  const availableProperties = properties.filter((property) => {
+    if (!property._id) {
+      console.warn("Property missing _id:", property); // Warn if a property is missing an _id
+      return false; // Exclude properties without an _id
+    }
+    return !bookedPropertyIds.includes(property._id); // Filter out booked properties
+  });
 
-  console.log("Available properties", availableProperties);
+  console.log("Available properties", availableProperties); // Debug log available properties
 
   return (
     <>
