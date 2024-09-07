@@ -1,19 +1,16 @@
-// ReviewForm.jsx
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import axios from 'axios';
 
-const ReviewForm = ({ element , userId }) => {
-
-  console.log("property check :",element._id);
-  console.log("userId check :",userId);
-  
+const ReviewForm = ({ element, userId }) => {
+  console.log("property check:", element._id);
+  console.log("userId check:", userId);
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/review/createreview', {
         userId,
-        propertyId:element._id,
+        propertyId: element._id,
         rating: values.rating,
         comment: values.comment,
       });
@@ -29,15 +26,11 @@ const ReviewForm = ({ element , userId }) => {
   return (
     <Formik
       initialValues={{
-        userId: '',
         rating: '',
         comment: '',
       }}
       validate={values => {
         const errors = {};
-        if (!values.userId) {
-          errors.userId = 'Required';
-        }
         if (!values.rating) {
           errors.rating = 'Required';
         } else if (isNaN(values.rating) || values.rating < 1 || values.rating > 5) {
@@ -52,7 +45,6 @@ const ReviewForm = ({ element , userId }) => {
     >
       {({ isSubmitting }) => (
         <Form>
-        
           <div>
             <label htmlFor="rating">Rating (1-5)</label>
             <Field type="number" name="rating" min="1" max="5" />
@@ -63,7 +55,7 @@ const ReviewForm = ({ element , userId }) => {
             <Field as="textarea" name="comment" />
             <ErrorMessage name="comment" component="div" />
           </div>
-          <button type="submit"  disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting}>
             Submit Review
           </button>
         </Form>
