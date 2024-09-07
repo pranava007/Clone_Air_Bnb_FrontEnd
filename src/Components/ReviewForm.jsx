@@ -11,7 +11,7 @@ const ReviewForm = ({ element , userId }) => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await axios.post('/api/reviews', {
+      const response = await axios.post('https://clone-air-bnb-backend.onrender.com/api/review/createreview', {
         userId,
         propertyId:element._id,
         rating: values.rating,
