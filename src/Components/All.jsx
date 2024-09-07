@@ -6,23 +6,24 @@ const All = () => {
   const { properties } = useSelector((state) => state.properties);
   const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
-  console.log("Trending", properties);
+  console.log("Trending properties", properties);
   console.log("Booking Info", bookingInfo); // Log bookingInfo to check its structure
 
-  // Ensure bookingInfo is an array
-  if (!Array.isArray(bookingInfo)) {
-    console.error("bookingInfo is not an array:", bookingInfo);
+  // Check if bookingInfo is an object and not an array
+  if (typeof bookingInfo !== "object" || Array.isArray(bookingInfo)) {
+    console.error("bookingInfo is not an object or is an array:", bookingInfo);
     return null; // Return early if bookingInfo is not in the expected format
   }
 
+  // Extract booking details if bookingInfo is an object
+  const bookedPropertyIds = Object.values(bookingInfo)
+    .filter((info) => info.status === "booked") // Adjust condition based on your actual data structure
+    .map((info) => info.propertyId);
+
   // Filter properties that are not booked
-  const availableProperties = properties.filter((property) => {
-    // Check if bookingInfo contains any entry with propertyId matching the property's _id and status is "booked"
-    const isBooked = bookingInfo.some(
-      (info) => info.propertyId === property._id && info.status === "booked"
-    );
-    return !isBooked; // Only include properties that are not booked
-  });
+  const availableProperties = properties.filter(
+    (property) => !bookedPropertyIds.includes(property._id)
+  );
 
   console.log("Available properties", availableProperties);
 
