@@ -6,6 +6,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import BookingCard from "../Components/BookingCard";
+import ReviewForm from "../Components/ReviewForm";
 
 const CartDetails = ({ items }) => {
   const reviews2 = [
@@ -262,8 +263,20 @@ const CartDetails = ({ items }) => {
           ))}
         </div>
       </div>
+
+
+  <ReviewForm/>
+  
+  
+  
+  
+  
+  
+  
     </div>
-  );
+);
+
+
 };
 
 export default CartDetails;
