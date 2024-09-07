@@ -11,7 +11,7 @@ const Cart = ({ element,index }) => {
     pricePerNight = "N/A",
   } = element;
 
-  console.log(element);
+  console.log("element :",element);
   
 
   return (
