@@ -118,7 +118,7 @@ function App() {
             element={<CartDetails items={properties} />}
           />
 
-          <Route path="/bookingdata" element={<BookigData/>}/>
+          {/* <Route path="/bookingdata" element={<BookigData/>}/> */}
 
           {/* Fileter pages */}
 
