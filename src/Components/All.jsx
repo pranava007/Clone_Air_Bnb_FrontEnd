@@ -7,18 +7,29 @@ const All = () => {
   const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
   console.log("Trending properties", properties);
-  console.log("Booking Info", bookingInfo); // Should show an empty array if there are no bookings
+  console.log("Booking Info", bookingInfo); // Log to see the current structure
 
-  // Check if bookingInfo is an array and handle the empty array case
-  if (!Array.isArray(bookingInfo)) {
-    console.error("bookingInfo is not an array:", bookingInfo);
-    return null; // Return early if bookingInfo is not in the expected format
+  // Check if bookingInfo is defined and an array
+  if (!bookingInfo || !Array.isArray(bookingInfo)) {
+    console.error("bookingInfo is not an array or is undefined:", bookingInfo);
+    return (
+      <>
+        <div className="container">
+          <div className="row justify-content-center">
+            {/* Handle empty or invalid bookingInfo gracefully */}
+            {properties.map((element, index) => (
+              <Cart key={index} element={element} index={index} />
+            ))}
+          </div>
+        </div>
+      </>
+    );
   }
 
-  // If bookingInfo is empty, all properties are available
+  // If bookingInfo is properly defined as an array, proceed with filtering
   const bookedPropertyIds = bookingInfo
-    .filter((info) => info.status === "confirmed") // This will be skipped if bookingInfo is empty
-    .map((info) => info.propertyId);
+    .filter((info) => info.status === "confirmed") // Filter for booked statuses
+    .map((info) => info.propertyId); // Extract booked property IDs
 
   // Filter properties that are not booked
   const availableProperties = properties.filter(
