@@ -3,11 +3,11 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import axios from 'axios';
 
-const ReviewForm = ({ propertyId }) => {
+const ReviewForm = ({ propertyId , userId }) => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const response = await axios.post('/api/reviews', {
-        userId: values.userId,
+        userId,
         propertyId,
         rating: values.rating,
         comment: values.comment,
@@ -47,11 +47,7 @@ const ReviewForm = ({ propertyId }) => {
     >
       {({ isSubmitting }) => (
         <Form>
-          <div>
-            <label htmlFor="userId">User ID</label>
-            <Field type="text" name="userId" />
-            <ErrorMessage name="userId" component="div" />
-          </div>
+        
           <div>
             <label htmlFor="rating">Rating (1-5)</label>
             <Field type="number" name="rating" min="1" max="5" />

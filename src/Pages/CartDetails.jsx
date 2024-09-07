@@ -36,6 +36,9 @@ const CartDetails = ({ items }) => {
   const isGuestFavourite = true;
 
   const { currentuser } = useSelector((state) => state.user);
+  console.log(currentuser);
+  
+  
 
   // Safely access nested properties
   const hostDetails = currentuser?.rest?._id === element.hostId ? currentuser : null; 
