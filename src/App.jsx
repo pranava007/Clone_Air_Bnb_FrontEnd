@@ -85,6 +85,7 @@ import Minsus from "./Components/Minsus";
 import Roykans from "./Components/Roykans";
 import Skiing from "./Components/Skiing";
 import BookigData from "./Components/BookigData";
+import ReviewForm from "./Components/ReviewForm";
 
 function App() {
   const { properties } = useSelector((state) => state.properties);
@@ -119,6 +120,7 @@ function App() {
           />
 
           <Route path="/bookingdata" element={<BookigData/>}/>
+          <Route path="/reviws" element={<ReviewForm/>}/>
 
           {/* Fileter pages */}
 
