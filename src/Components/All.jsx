@@ -7,17 +7,17 @@ const All = () => {
   const { bookingInfo } = useSelector((state) => state.bookingInfo);
 
   console.log("Trending properties", properties);
-  console.log("Booking Info", bookingInfo); // Log bookingInfo to check its structure
+  console.log("Booking Info", bookingInfo); // Should show an empty array if there are no bookings
 
-  // Check if bookingInfo is an object and not an array
-  if (typeof bookingInfo !== "object" || Array.isArray(bookingInfo)) {
-    console.error("bookingInfo is not an object or is an array:", bookingInfo);
+  // Check if bookingInfo is an array and handle the empty array case
+  if (!Array.isArray(bookingInfo)) {
+    console.error("bookingInfo is not an array:", bookingInfo);
     return null; // Return early if bookingInfo is not in the expected format
   }
 
-  // Extract booking details if bookingInfo is an object
-  const bookedPropertyIds = Object.values(bookingInfo)
-    .filter((info) => info.status === "booked") // Adjust condition based on your actual data structure
+  // If bookingInfo is empty, all properties are available
+  const bookedPropertyIds = bookingInfo
+    .filter((info) => info.status === "booked") // This will be skipped if bookingInfo is empty
     .map((info) => info.propertyId);
 
   // Filter properties that are not booked
