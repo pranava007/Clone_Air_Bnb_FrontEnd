@@ -39,7 +39,7 @@ console.log('Filtered Properties:', filteredProperties);
       <div className="container">
         <div className="row justify-content-center">
           {/* Using map to render each property as a card */}
-          {properties.map((element, index) => {
+          {filteredProperties.map((element, index) => {
             return <Cart element={element} index={index} />;
           })}
         </div>
