@@ -7,7 +7,12 @@ const All = () => {
   const { bookingInfo  } = useSelector((state)=>state.bookingInfo);
   console.log( 'Trending', properties);
   console.log( 'bookinginfo', bookingInfo);
-  // const {} =  useSelector((state)=>)
+
+  if(bookingInfo.status="confirmed") {
+    console.log("confirm :",bookingInfo);
+  }
+  
+
 
   return (
     <>
