@@ -13,7 +13,7 @@ const All = () => {
   const confirmedBookings = bookingInfo.bookings.filter((booking) => booking.status === "confirmed");
 
   console.log("confirm book",confirmedBookings);
-  console.log(confirmedBookings.propertyId._id);
+  console.log(confirmedBookings.propertyId);
   
 
   //  const notbooked = properties.filter((item)=>item._id !== )
