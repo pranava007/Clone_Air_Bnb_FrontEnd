@@ -4,19 +4,37 @@ import Cart from "./Cart";
 
 const All = () => {
   const { properties } = useSelector((state) => state.properties);
-  const { bookingInfo  } = useSelector((state)=>state.bookingInfo);
-  console.log( 'Trending', properties);
-  console.log( 'bookinginfo', bookingInfo);
-  // const {} =  useSelector((state)=>)
+  const { bookingInfo } = useSelector((state) => state.bookingInfo);
+
+  console.log("Trending properties", properties);
+  console.log("Booking Info", bookingInfo); // Should show an empty array if there are no bookings
+
+  // Check if bookingInfo is an array and handle the empty array case
+  if (!Array.isArray(bookingInfo)) {
+    console.error("bookingInfo is not an array:", bookingInfo);
+    return null; // Return early if bookingInfo is not in the expected format
+  }
+
+  // If bookingInfo is empty, all properties are available
+  const bookedPropertyIds = bookingInfo
+    .filter((info) => info.status === "confirmed") // This will be skipped if bookingInfo is empty
+    .map((info) => info.propertyId);
+
+  // Filter properties that are not booked
+  const availableProperties = properties.filter(
+    (property) => !bookedPropertyIds.includes(property._id)
+  );
+
+  console.log("Available properties", availableProperties);
 
   return (
     <>
       <div className="container">
         <div className="row justify-content-center">
-          {/* Using map to render each property as a card */}
-          {properties.map((element, index) => {
-            return <Cart element={element} index={index} />;
-          })}
+          {/* Render only available (not booked) properties */}
+          {availableProperties.map((element, index) => (
+            <Cart key={index} element={element} index={index} />
+          ))}
         </div>
       </div>
     </>
