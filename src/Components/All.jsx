@@ -16,7 +16,17 @@ const All = () => {
   console.log( 'Trending', properties[0]._id);
   console.log("confirm book",confirmedBookings[0].propertyId._id);
 
-  // const bookeddata = properties.
+
+
+  // Assuming confirmedBookings is already filtered for "confirmed" bookings
+const confirmedPropertyIds = confirmedBookings.map((booking) => booking.propertyId._id);
+
+const filteredProperties = properties.filter(
+  (property) => !confirmedPropertyIds.includes(property._id)
+);
+
+console.log('Filtered Properties:', filteredProperties);
+
   
 
 
