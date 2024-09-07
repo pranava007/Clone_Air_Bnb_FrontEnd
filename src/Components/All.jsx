@@ -9,6 +9,15 @@ const All = () => {
   console.log( 'bookinginfo', bookingInfo);
   console.log( 'bookinginfo', bookingInfo.bookings.status === "confirmed");
 
+
+  const confirmedBookings = bookingInfo.bookings.filter((booking) => booking.status === "confirmed");
+
+  console.log(confirmedBookings);
+  
+
+
+
+
  
   
 
