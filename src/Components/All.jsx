@@ -6,7 +6,7 @@ const All = () => {
   const { properties } = useSelector((state) => state.properties);
   const { bookingInfo  } = useSelector((state)=>state.bookingInfo);
   console.log( 'Trending', properties);
-  console.log( 'bookinginfo', bookingInfo.status);
+  console.log( 'bookinginfo', bookingInfo[0].status);
   // const {} =  useSelector((state)=>)
 
   return (
