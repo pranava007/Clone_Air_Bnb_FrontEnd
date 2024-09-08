@@ -9,21 +9,17 @@ import BookingCard from "../Components/BookingCard";
 import ReviewForm from "../Components/ReviewForm";
 
 const CartDetails = ({ items }) => {
-  
-  console.log('item',items);
-  
+  console.log('item', items);
 
-  const { reviwe } = useSelector((state)=>state.reviwe)
-
-  console.log("reviwe",reviwe);
-  
-
+  // Fetching reviews from Redux state
+  const { reviwe } = useSelector((state) => state.reviwe);
+  console.log("reviwe", reviwe);
 
   const { index } = useParams();
   const element = items[index];
-  console.log("element check:",element);
-  console.log("property element id:",element._id);
-  
+  console.log("element check:", element);
+  console.log("property element id:", element?._id);
+
   const rating = 5.0;
   const reviews = 7;
   const isGuestFavourite = true;
@@ -31,28 +27,22 @@ const CartDetails = ({ items }) => {
   const { currentuser } = useSelector((state) => state.user);
   console.log(currentuser);
 
-  const userId = currentuser.rest._id;
+  const userId = currentuser?.rest?._id;
 
- 
-  const ReviweproducteId = reviwe[index].propertyId._id;
-  console.log('ReviweproducteId',ReviweproducteId);
+  // Check if reviews and element are available before accessing
+  const ReviweproducteId = reviwe[index]?.propertyId?._id;
+  console.log('ReviweproducteId', ReviweproducteId);
 
-  
-
-  // console.log("userId",userId);
- 
-  // propertyId,
-  
-  
-  
-
-  // Safely access nested properties
+  // Ensure host details are correctly matched
   const hostDetails =
-  currentuser?.rest?._id && element.hostId && currentuser?.rest?._id === element.hostId
-    ? currentuser
-    : null;
+    currentuser?.rest?._id && element.hostId && currentuser?.rest?._id === element.hostId
+      ? currentuser
+      : null;
 
- console.log("hostDetails:", hostDetails);  
+  console.log("hostDetails:", hostDetails);
+
+  // Filter reviews for the current property
+  const filteredReviews = reviwe.filter((review) => review.propertyId._id === element._id);
 
   return (
     <div className="container mt-4">
@@ -204,10 +194,8 @@ const CartDetails = ({ items }) => {
           </div>
 
           <div className="col-md-4">
-            {/* <div className="card shadow p-3 mb-5 bg-white rounded"> */}
-           <BookingCard index={index}/>
-           
-            {/* </div> */}
+            {/* Booking Card Component */}
+            <BookingCard index={index} />
           </div>
 
         </div>
@@ -252,7 +240,7 @@ const CartDetails = ({ items }) => {
       <div className="container mt-4">
         <h3>Customer Reviews</h3>
         <div className="row">
-          {reviwe.map((review, index) => (
+          {filteredReviews.map((review, index) => (
             <div className="col-md-4 mb-4" key={index}>
               <div className="card h-100">
                 <div className="card-body">
@@ -275,21 +263,11 @@ const CartDetails = ({ items }) => {
         </div>
       </div>
 
-      {/* {reviwe.propertyId._id} */}
+      {/* Review Form for Current User */}
+      <ReviewForm userId={userId} element={element} />
 
-
-  <ReviewForm userId={userId} element={element} />
-  
-  
-  
-  
-  
-  
-  
     </div>
-);
-
-
+  );
 };
 
 export default CartDetails;
