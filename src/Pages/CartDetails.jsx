@@ -58,7 +58,7 @@ const CartDetails = ({ items }) => {
   const hostDetails = currentuser?.rest?._id === element.hostId ? currentuser : null; 
   
 
-  console.log(hostDetails)
+  console.log("data",hostDetails)
 
   return (
     <div className="container mt-4">
