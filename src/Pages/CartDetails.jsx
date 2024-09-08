@@ -29,6 +29,9 @@ const CartDetails = ({ items }) => {
     // Add more reviews here...
   ];
 
+  console.log('item',items);
+  
+
   const { reviwe } = useSelector((state)=>state.reviwe)
 
   console.log("reviwe",reviwe);
