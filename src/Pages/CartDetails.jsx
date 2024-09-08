@@ -47,6 +47,9 @@ const CartDetails = ({ items }) => {
 
   const userId = currentuser.rest._id;
 
+  console.log('id',reviwe.propertyId._id);
+  
+
   // console.log("userId",userId);
  
   // propertyId,
@@ -281,7 +284,7 @@ const CartDetails = ({ items }) => {
         </div>
       </div>
 
-      {}
+      {/* {reviwe.propertyId._id} */}
 
 
   <ReviewForm userId={userId} element={element} />
