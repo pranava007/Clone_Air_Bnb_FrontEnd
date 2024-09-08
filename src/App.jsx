@@ -122,7 +122,7 @@ function App() {
 
           <Route path="/bookingdata" element={<BookigData/>}/>
           <Route path="/reviws" element={<ReviewForm/>}/>
-          <Route path="/capture" element={<CaptureReviewData/>}/>
+          {/* <Route path="/capture" element={<CaptureReviewData/>}/> */}
 
           {/* Fileter pages */}
 
