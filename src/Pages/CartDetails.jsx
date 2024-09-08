@@ -43,7 +43,7 @@ const CartDetails = ({ items }) => {
   const isGuestFavourite = true;
 
   const { currentuser } = useSelector((state) => state.user);
-  console.log(currentuser.rest._id);
+  console.log(currentuser);
 
   const userId = currentuser.rest._id;
 
@@ -258,19 +258,19 @@ const CartDetails = ({ items }) => {
       <div className="container mt-4">
         <h3>Customer Reviews</h3>
         <div className="row">
-          {reviews2.map((review, index) => (
+          {reviwe.map((review, index) => (
             <div className="col-md-4 mb-4" key={index}>
               <div className="card h-100">
                 <div className="card-body">
                   <h5 className="card-title">
-                    {review.name} 
+                    {review.userId.username} 
                     <span className="ms-2">
                       <FontAwesomeIcon icon={faStar} className="text-warning" />
                       {` Rating: ${review.rating} stars`}
                     </span>
                   </h5>
                   <h6 className="card-subtitle mb-2 text-muted">{review.date}</h6>
-                  <p className="card-text">{review.review}</p>
+                  <p className="card-text">{review.comment}</p>
                 </div>
                 <div className="card-footer">
                   <small className="text-muted">Host: {review.host} ({review.stayDuration})</small>

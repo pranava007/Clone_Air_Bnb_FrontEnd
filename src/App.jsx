@@ -184,10 +184,6 @@ function App() {
           <Route path="/yurts" element={<Yurts/>}/>         
 
 
-          
-
-
-
 
      
         </Routes>
