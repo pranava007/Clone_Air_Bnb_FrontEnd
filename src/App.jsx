@@ -86,6 +86,7 @@ import Roykans from "./Components/Roykans";
 import Skiing from "./Components/Skiing";
 import BookigData from "./Components/BookigData";
 import ReviewForm from "./Components/ReviewForm";
+import CaptureReviewData from "./Components/CaptureReviewData";
 
 function App() {
   const { properties } = useSelector((state) => state.properties);
@@ -121,6 +122,7 @@ function App() {
 
           <Route path="/bookingdata" element={<BookigData/>}/>
           <Route path="/reviws" element={<ReviewForm/>}/>
+          <Route path="/capture" element={<CaptureReviewData/>}/>
 
           {/* Fileter pages */}
 
