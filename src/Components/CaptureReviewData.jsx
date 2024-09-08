@@ -10,6 +10,8 @@ const CaptureReviewData = async() => {
     try {
      
       const responce =   await axios.get('https://clone-air-bnb-backend.onrender.com/api/review/getreviw')
+      console.log("capturedata :",responce.data);
+      
       dispatch(reviweSuccess(responce.data))
 
         
@@ -21,7 +23,7 @@ const CaptureReviewData = async() => {
         <>
         
         </>
-        
+
     )
 }
 
