@@ -31,7 +31,7 @@ const CartDetails = ({ items }) => {
 
   const { reviwe } = useSelector((state)=>state.reviwe)
 
-  console.log(reviwe);
+  console.log("reviwe",reviwe);
   
 
   const { index } = useParams();
