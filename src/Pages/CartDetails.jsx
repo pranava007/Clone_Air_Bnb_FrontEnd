@@ -47,7 +47,7 @@ const CartDetails = ({ items }) => {
 
   const userId = currentuser.rest._id;
 
-  console.log('id',reviwe.propertyId._id);
+  console.log('id',reviwe.propertyId[0]._id);
   
 
   // console.log("userId",userId);
