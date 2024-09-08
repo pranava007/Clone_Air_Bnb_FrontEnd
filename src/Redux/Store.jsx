@@ -7,6 +7,7 @@ import propertyReducer from "./Slice/PropertySlice";
 import filterRaducer from './Slice/FilterSlice'
 import imageUploadRaducer from "./Slice/imageUploadSlice";
 import BookingRaducer from "./Slice/BookingSlice";
+import ReviewRaducer from "./Slice/ReviewSlice";
 
 
 
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     filters:filterRaducer,
     imageUpload:imageUploadRaducer,
     bookingInfo:BookingRaducer,
+    reviwe:ReviewRaducer,
 
 })
 

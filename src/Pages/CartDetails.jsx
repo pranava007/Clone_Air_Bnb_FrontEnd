@@ -29,6 +29,11 @@ const CartDetails = ({ items }) => {
     // Add more reviews here...
   ];
 
+  const { reviwe } = useSelector((state)=>state.reviwe)
+
+  console.log(reviwe);
+  
+
   const { index } = useParams();
   const element = items[index];
   // console.log("check:",element);
