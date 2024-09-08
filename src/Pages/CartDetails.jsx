@@ -9,26 +9,7 @@ import BookingCard from "../Components/BookingCard";
 import ReviewForm from "../Components/ReviewForm";
 
 const CartDetails = ({ items }) => {
-  const reviews2 = [
-    {
-      name: "Rudra",
-      rating: 5,
-      date: "3 weeks ago",
-      review: "The place is more than the pics. Blissful and nested atop in the coffee estate, surrounded by nature in every corner...",
-      host: "Joseph",
-      stayDuration: "3 years on Airbnb"
-    },
-    {
-      name: "Hanumant",
-      rating: 5,
-      date: "August 2023",
-      review: "Had planned to stay with my friends over a long weekend at Pristine Hills. The name accurately describes the homestay...",
-      host: "Joseph",
-      stayDuration: "5 years on Airbnb"
-    },
-    // Add more reviews here...
-  ];
-
+  
   console.log('item',items);
   
 
@@ -37,9 +18,11 @@ const CartDetails = ({ items }) => {
   console.log("reviwe",reviwe);
   
 
+
   const { index } = useParams();
   const element = items[index];
   console.log("element check:",element);
+  console.log("property element id:",element._id);
   
   const rating = 5.0;
   const reviews = 7;
@@ -69,9 +52,7 @@ const CartDetails = ({ items }) => {
     ? currentuser
     : null;
 
-console.log("hostDetails:", hostDetails);  
-
-  console.log("data",hostDetails)
+ console.log("hostDetails:", hostDetails);  
 
   return (
     <div className="container mt-4">
