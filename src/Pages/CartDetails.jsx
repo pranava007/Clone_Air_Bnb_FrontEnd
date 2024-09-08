@@ -36,7 +36,7 @@ const CartDetails = ({ items }) => {
 
   const { index } = useParams();
   const element = items[index];
-  // console.log("check:",element);
+  console.log("element check:",element);
   
   const rating = 5.0;
   const reviews = 7;
@@ -280,6 +280,8 @@ const CartDetails = ({ items }) => {
           ))}
         </div>
       </div>
+
+      {}
 
 
   <ReviewForm userId={userId} element={element} />
