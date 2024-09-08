@@ -58,8 +58,12 @@ const CartDetails = ({ items }) => {
   
 
   // Safely access nested properties
-  const hostDetails = currentuser?.rest?._id === element.hostId ? currentuser : null; 
-  
+  const hostDetails =
+  currentuser?.rest?._id && element.hostId && currentuser?.rest?._id === element.hostId
+    ? currentuser
+    : null;
+
+console.log("hostDetails:", hostDetails);  
 
   console.log("data",hostDetails)
 
