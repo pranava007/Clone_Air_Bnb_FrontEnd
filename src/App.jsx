@@ -87,6 +87,7 @@ import Skiing from "./Components/Skiing";
 import BookigData from "./Components/BookigData";
 import ReviewForm from "./Components/ReviewForm";
 import CaptureReviewData from "./Components/CaptureReviewData";
+import Filterpage from "./Components/Filterpage";
 
 function App() {
   const { properties } = useSelector((state) => state.properties);
@@ -125,8 +126,10 @@ function App() {
           <Route path="/capture" element={<CaptureReviewData/>}/>
 
           {/* Fileter pages */}
-
-          <Route path="/adapted" element={<Adapted/>}/>
+          {/* Filterpage */}
+         {/* <Route path="/filter" element={< />}/> */}
+         <Route path="/filterpage" element={<Filterpage/>}/>
+          <Route path="/adapted" element={<Adapted/>}/>     
           <Route path="/aFrames" element={<AFrames/>}/>
           <Route path="/all" element={<All/>}/>
           <Route path="/amazingPools" element={<AmazingPools/>}/>
