@@ -116,14 +116,23 @@ function App() {
 
           <Route path="/get-post" element={<PreviousPost />} />
 
+          
+
           <Route
             path="/cart/:index"
             element={<CartDetails items={properties} />}
           />
 
+           
+          <Route
+            path="/home"
+            element={<HomePage  />}
+          />
+
           <Route path="/bookingdata" element={<BookigData/>}/>
           <Route path="/reviws" element={<ReviewForm/>}/>
           <Route path="/capture" element={<CaptureReviewData/>}/>
+
 
           {/* Fileter pages */}
           {/* Filterpage */}

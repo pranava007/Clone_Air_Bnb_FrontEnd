@@ -1,28 +1,26 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { bookingInfoSuccess } from '../Redux/Slice/BookingSlice'
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { bookingInfoSuccess } from '../Redux/Slice/BookingSlice';
 
+const BookigData = () => {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const fetchBookingData = async () => {
+      try {
+        const response = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings');
+        dispatch(bookingInfoSuccess(response.data));
+        console.log('log data', response.data);
+      } catch (error) {
+        console.error('Error fetching booking data:', error);
+      }
+    };
 
-const BookigData = async() => {
-    const dispatch = useDispatch()
+    fetchBookingData();
+  }, [dispatch]);
 
-    try {
+  return <div>Booking data is being fetched...</div>;
+};
 
-        const responce = await axios.get('https://clone-air-bnb-backend.onrender.com/api/bookings/bookings')
-        dispatch(bookingInfoSuccess(responce.data))
-        console.log('log data',responce.data);
-        
-   
-    } catch (error) {
-     console.log(error);
-        
-    }
-
-  return (
-    <div>BookigData</div>
-  )
-}
-
-export default BookigData
+export default BookigData;

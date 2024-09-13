@@ -47,23 +47,37 @@ const DashboardSidbare = () => {
         style={{ height: "100vh", width: "100%" }}
       >
         <div className="d-flex flex-column">
+
+
+
+        
+
+
+
           <Link className="d-block p-3 sidebartext link">
             {currentuser.rest.role === "host" ? "Host" : "User"}
           </Link>
-          <Link
-            to="/dashboard?tab=profile"
-            className={`d-block p-3 sidebartext ${
-              tab === "profile" ? "active" : ""
-            } link`}
-          >
-            {currentuser.rest.username}
-          </Link>
-          <Link to="/get-post" className="d-block sidebartext p-3 link">
+
+          <Link to="/home" className="d-block sidebartext p-3 link">
+           Home
+          </Link> 
+          
+       
+
+          {currentuser.rest.role === 'host' &&  <Link to="/get-post" className="d-block sidebartext p-3 link">
             All Post
-          </Link>
-          <Link to="/create-post" className="d-block sidebartext p-3 link">
+          </Link> }
+
+         
+
+         
+
+
+        {currentuser.rest.role === 'host' &&   <Link to="/create-post" className="d-block sidebartext p-3 link">
             Create Post
-          </Link>
+          </Link>}
+
+
           <Link
             to=""
             className="d-block p-3 sidebartext link"

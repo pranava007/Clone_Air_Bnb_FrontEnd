@@ -14,7 +14,8 @@ const AFrames = () => {
 
   // Extract property IDs of confirmed bookings
   const confirmedPropertyIds = confirmedBookings.map(
-    (booking) => booking.propertyId._id
+    (booking) => booking.propertyId._id 
+    
   );
 
   // Filter properties with 'AFrames' category and exclude confirmed bookings
